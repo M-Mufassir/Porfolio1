@@ -1,64 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap');
 
-:root,
-:root[data-theme='dark'] {
-  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+:root {
+  font-family: 'Sora', 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #e2e8f0;
+  color: #f8fbff;
   background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 26%),
-    linear-gradient(180deg, #020617 0%, #050b17 38%, #020617 100%);
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.16), transparent 26%),
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.14), transparent 30%),
+    linear-gradient(180deg, #030712 0%, #040914 48%, #030712 100%);
   color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --text-strong: #f8fafc;
-  --text-soft: #b7c4d8;
-  --text-muted: #8090a6;
-  --surface-rgb: 9, 16, 30;
-  --surface-strong-rgb: 15, 23, 42;
-  --surface-highlight-rgb: 255, 255, 255;
-  --nav-rgb: 8, 15, 27;
-  --border-rgb: 148, 163, 184;
-  --shadow-rgb: 2, 8, 23;
-  --theme-glow-rgb: 56, 189, 248;
-  --brand-mark-bg: #dbeafe;
-  --brand-mark-text: #04111e;
-  --button-primary-text: #04111e;
-  --chip-face-text: #04111e;
-  --toggle-shift: 1.15rem;
-}
-
-:root[data-theme='light'] {
-  color: #10213b;
-  background:
-    radial-gradient(circle at top, rgba(96, 165, 250, 0.16), transparent 24%),
-    linear-gradient(180deg, #eef5ff 0%, #f8fbff 48%, #ebf3ff 100%);
-  color-scheme: light;
-  --text-strong: #10213b;
-  --text-soft: #455873;
-  --text-muted: #6e829f;
-  --surface-rgb: 255, 255, 255;
-  --surface-strong-rgb: 235, 244, 255;
-  --surface-highlight-rgb: 255, 255, 255;
-  --nav-rgb: 246, 250, 255;
-  --border-rgb: 120, 143, 176;
-  --shadow-rgb: 55, 83, 122;
-  --theme-glow-rgb: 14, 165, 233;
-  --brand-mark-bg: #10213b;
-  --brand-mark-text: #ffffff;
-  --button-primary-text: #ffffff;
-  --chip-face-text: #ffffff;
-  --toggle-shift: 0;
+  --text-strong: #f8fbff;
+  --text-soft: #b8c6df;
+  --text-muted: #7f92b3;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -67,9 +34,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   color: var(--text-strong);
-  background:
-    radial-gradient(circle at top, rgba(var(--theme-glow-rgb), 0.08), transparent 26%),
-    linear-gradient(180deg, transparent 0%, transparent 100%);
+  background: transparent;
 }
 
 body::before {
@@ -78,14 +43,17 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(var(--border-rgb), 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--border-rgb), 0.04) 1px, transparent 1px);
-  background-size: 4.5rem 4.5rem;
-  mask-image: radial-gradient(circle at center, black 44%, transparent 100%);
+    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  mask-image: radial-gradient(circle at center, black 38%, transparent 92%);
 }
 
 a,
-button {
+button,
+input,
+textarea,
+select {
   font: inherit;
 }
 
@@ -98,12 +66,17 @@ h2,
 h3,
 h4,
 strong {
-  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  font-family: 'Sora', 'Segoe UI', sans-serif;
 }
 
 code,
 .brand-mark {
   font-family: 'IBM Plex Mono', 'Consolas', monospace;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 #root {
@@ -112,6 +85,6 @@ code,
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--text-strong);
+  outline: 2px solid #f8fbff;
   outline-offset: 3px;
 }
