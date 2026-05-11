@@ -11,30 +11,30 @@ export const brandProfile = {
   name: 'Mohamed Mufassir',
   monogram: 'MM',
   title: 'Computer Systems Engineering Undergraduate',
-  tagline: 'Embedded Systems, Control, and Full-Stack Development',
+  tagline: 'Embedded Systems, Robotics, and Real-Time Control',
   summary:
-    'I build reliable software and hardware-connected systems with a focus on embedded engineering, real-time control, and practical product development.',
+    'I build intelligent hardware-software systems, from AVR-programmed autonomous robots to IoT-connected vehicles and real-time control systems.',
   location: 'Thihariya, Sri Lanka',
   education: 'BSc (Hons) in Computer Systems Engineering, SLIIT',
   availability: 'Open to internships, graduate roles, and engineering collaborations',
 }
 
 export const heroMetrics = [
-  { label: 'Focus', value: 'Embedded, IoT, control systems' },
-  { label: 'Education', value: 'SLIIT • 2023 to 2027' },
-  { label: 'Tools', value: 'C, AVR, ESP32, React, Spring Boot' },
+  { label: 'Focus', value: 'Embedded, robotics, real-time control' },
+  { label: 'Education', value: 'SLIIT - 2023 to 2027' },
+  { label: 'Tools', value: 'AVR, ESP32-CAM, Raspberry Pi, Python' },
 ]
 
 export const aboutHighlights = [
   {
     title: 'Embedded and real-time systems',
     description:
-      'I enjoy building systems that combine sensing, control, and device-level programming into dependable engineering solutions.',
+      'I enjoy building systems that combine sensing, control logic, and device-level programming into dependable engineering solutions.',
   },
   {
-    title: 'Software with engineering discipline',
+    title: 'Robotics and control focus',
     description:
-      'From React interfaces to backend APIs, I prefer clean implementation, maintainable structure, and practical delivery over visual noise.',
+      'My strongest project work sits around autonomous behaviour, PID control, live telemetry, and practical hardware integration.',
   },
   {
     title: 'Hands-on debugging and iteration',
@@ -46,23 +46,62 @@ export const aboutHighlights = [
 export const skillSections = [
   {
     title: 'Programming',
-    items: ['Full Stack Development', 'C', 'Embedded C', 'AVR Assembly', 'Python', 'Java'],
+    items: ['C', 'Embedded C', 'AVR Assembly', 'Python', 'JavaScript', 'TypeScript'],
   },
   {
-    title: 'Embedded Systems',
-    items: ['AVR (ATmega)', 'Arduino', 'ESP32', 'Real-Time Systems', 'Sensors and Actuators'],
+    title: 'Embedded and Robotics',
+    items: ['AVR (ATmega)', 'Arduino Uno', 'ESP32-CAM', 'Raspberry Pi', 'Sensors and Actuators'],
+  },
+  {
+    title: 'Protocols and Control',
+    items: ['PID Control', 'FSM Design', 'UART', 'SPI', 'I2C', 'WiFi/HTTP Streaming'],
   },
   {
     title: 'Software and Tools',
-    items: ['React', 'Spring Boot', 'REST APIs', 'Git', 'Proteus', 'MATLAB', 'Arduino IDE'],
-  },
-  {
-    title: 'Engineering Strengths',
-    items: ['Debugging', 'Hardware Troubleshooting', 'Digital Logic Design', 'Circuit Analysis', 'System Integration'],
+    items: ['React', 'Vue.js', 'Electron.js', 'Spring Boot', 'PostgreSQL', 'Docker', 'Git'],
   },
 ]
 
 export const projectCards = [
+  {
+    domain: 'robotics',
+    domainLabel: 'Robotics',
+    type: 'Autonomous robot',
+    title: 'AVR Autonomous Line-Following Car with Smart Parking',
+    summary:
+      'An Arduino Uno robot programmed at AVR level to follow lines, detect cross-line events, search for a parking bay, and park autonomously.',
+    stack: ['AVR ATmega', 'Arduino Uno', 'Microchip Studio', 'Embedded C', 'IR Sensors', 'FSM Control'],
+    points: [
+      'Programmed line tracking and cross-line detection logic using three IR sensors.',
+      'Implemented parking bay detection with an IR receiver and autonomous parking behaviour.',
+      'Used single and double cross-line events to switch between line-following, parking search, and resume modes.',
+      'Demonstrated a full FSM-based behavioural control system on real robot hardware.',
+    ],
+    images: [
+      '/images/projects/AVR-Assembly/image-1.png',
+      '/images/projects/AVR-Assembly/image-2.png',
+    ],
+    repo: null,
+    repoNote: 'Featured first to align the portfolio with embedded and robotics roles.',
+  },
+  {
+    domain: 'robotics',
+    domainLabel: 'Robotics and IoT',
+    type: 'Live video vehicle',
+    title: 'ESP32-CAM Remote-Controlled Car with Live Video Streaming',
+    summary:
+      'A WiFi-controlled RC car where the ESP32-CAM acts as both access point and video server for real-time driving and camera feedback.',
+    stack: ['ESP32-CAM', 'Embedded C', 'JavaScript', 'Vercel', 'WiFi', 'MJPEG Streaming'],
+    points: [
+      'Built a remote-controlled vehicle with live MJPEG video streaming through the ESP32-CAM.',
+      'Developed mobile and web-based control surfaces for directional driving and camera feed viewing.',
+      'Synchronized movement commands and live video over the ESP32 internal WiFi network.',
+      'Published the web controller flow through Vercel for easier demonstration.',
+    ],
+    images: ['/images/projects/default.png'],
+    repo: null,
+    repoNote: 'Uses the default image until project-specific RC car images are added.',
+  },
   {
     domain: 'embedded',
     domainLabel: 'Embedded Systems',
@@ -70,16 +109,20 @@ export const projectCards = [
     title: 'PID-Based DC Motor Speed Control System',
     summary:
       'A Raspberry Pi based real-time closed-loop motor control project focused on precise speed regulation and tuning.',
-    stack: ['Raspberry Pi', 'PID Control', 'Encoder Feedback', 'Real-Time Monitoring'],
+    stack: ['Raspberry Pi', 'Python', 'PID Control', 'Encoder Feedback', 'Live Data Visualization'],
     points: [
-      'Designed a closed-loop control system using a PID algorithm.',
-      'Integrated encoder feedback for accurate RPM measurement.',
-      'Built a monitoring interface for live tuning and analysis.',
-      'Improved stability while minimizing steady-state error.',
+      'Designed a real-time closed-loop control system using a PID algorithm.',
+      'Integrated encoder feedback for accurate RPM measurement and regulation.',
+      'Built a Python desktop GUI for live RPM graphs, tuning parameters, and motor behaviour analysis.',
+      'Achieved stable, accurate motor control and documented system performance.',
+    ],
+    images: [
+      '/images/projects/PID/PID-1.png',
+      '/images/projects/PID/PID-2.png',
+      '/images/projects/PID/PID-3.png',
     ],
     repo: null,
     repoNote: 'Based on the latest uploaded CV.',
-    featured: true,
   },
   {
     domain: 'embedded',
@@ -88,16 +131,16 @@ export const projectCards = [
     title: 'IoT Smart Surveillance and Access Control System',
     summary:
       'An ESP32-based surveillance and access workflow with real-time alerts, image capture, and remote door control.',
-    stack: ['ESP32', 'Camera', 'Telegram Bot', 'IoT Communication'],
+    stack: ['ESP32', 'Embedded C', 'Camera', 'Telegram Bot API', 'UART/I2C'],
     points: [
       'Developed surveillance logic with camera and Telegram bot integration.',
       'Captured and transmitted images on intrusion or visitor detection.',
       'Enabled remote lock and unlock actions through Telegram commands.',
-      'Handled real-time communication and debugging across the full flow.',
+      'Implemented UART/I2C communication and real-time IoT messaging across the full flow.',
     ],
+    images: ['/images/projects/Surveillance-System/image.png'],
     repo: null,
     repoNote: 'Based on the latest uploaded CV.',
-    featured: true,
   },
   {
     domain: 'systems',
@@ -113,9 +156,13 @@ export const projectCards = [
       'Processed serial input through an FSM for pattern detection.',
       'Maintained synchronized clocking and reliable behavior.',
     ],
+    images: [
+      '/images/projects/FSM-Sequence-detector/1.png',
+      '/images/projects/FSM-Sequence-detector/2.png',
+      '/images/projects/FSM-Sequence-detector/3.png',
+    ],
     repo: null,
     repoNote: 'Based on the latest uploaded CV.',
-    featured: true,
   },
   {
     domain: 'software',
@@ -130,9 +177,13 @@ export const projectCards = [
       'Integrated the database layer with a scalable service structure.',
       'Organized the system for maintainable feature growth.',
     ],
+    images: [
+      '/images/projects/LMS/image.png',
+      '/images/projects/LMS/image-1.png',
+      '/images/projects/LMS/image-2.png',
+    ],
     repo: null,
     repoNote: 'Project details updated from the latest uploaded CV.',
-    featured: true,
   },
   {
     domain: 'software',
@@ -140,16 +191,21 @@ export const projectCards = [
     type: 'Desktop product',
     title: 'Desktop POS System',
     summary:
-      'A desktop point-of-sale system focused on inventory management, sales flow, and a clean modular interface.',
-    stack: ['Electron', 'React', 'SQLite'],
+      'A cross-platform desktop point-of-sale system focused on inventory management, sales flow, and a modular product structure.',
+    stack: ['Electron.js', 'TypeScript', 'React', 'PostgreSQL'],
     points: [
-      'Built inventory and transaction flows around a responsive interface.',
-      'Kept the architecture modular so new features could be added cleanly.',
-      'Balanced day-to-day utility with a polished product feel.',
+      'Led sole development during the ZILLIT internship as part of a wider IoT ecosystem direction.',
+      'Built inventory and transaction flows around a desktop interface.',
+      'Used Electron and TypeScript for cross-platform application delivery.',
+    ],
+    images: [
+      '/images/projects/POS/1.png',
+      '/images/projects/POS/2.png',
+      '/images/projects/POS/3.png',
+      '/images/projects/POS/4.png',
     ],
     repo: null,
     repoNote: 'Repository link can be added when the public repo is ready.',
-    featured: false,
   },
   {
     domain: 'software',
@@ -157,33 +213,21 @@ export const projectCards = [
     type: 'Web build',
     title: 'Business Website Development',
     summary:
-      'Business-facing websites designed with strong structure, responsiveness, and practical UX.',
-    stack: ['React', 'Responsive Design', 'Modern Web Stack'],
+      'Business-facing websites for local clients, including retail, restaurant, and booking-platform style work.',
+    stack: ['React', 'HTML/CSS', 'JavaScript', 'Responsive Design'],
     points: [
-      'Designed sites for real-world business use instead of presentation-only demos.',
-      'Improved hierarchy, trust, and mobile responsiveness.',
-      'Used visual polish to support clarity and conversion.',
+      'Designed and developed websites for a jewelry shop, hardware store, restaurant, and indoor playground booking platform.',
+      'Delivered end-to-end work across UI design, branding, and front-end development.',
+      'Improved hierarchy, trust, and mobile responsiveness for real-world business use.',
+    ],
+    images: [
+      '/images/projects/personal-website/1.png',
+      '/images/projects/personal-website/2.png',
+      '/images/projects/personal-website/3.png',
+      '/images/projects/personal-website/4.png',
     ],
     repo: null,
     repoNote: 'Case-study links can be added for selected client work.',
-    featured: false,
-  },
-  {
-    domain: 'embedded',
-    domainLabel: 'Embedded Systems',
-    type: 'IoT prototype',
-    title: 'IoT-Based Security Monitoring System',
-    summary:
-      'An ESP32-based monitoring prototype for sensor-driven event detection and connected alerts.',
-    stack: ['ESP32', 'Arduino IDE', 'Embedded C', 'Sensors', 'Wi-Fi'],
-    points: [
-      'Designed embedded firmware to manage sensor inputs and system response.',
-      'Handled hardware integration, circuit testing, and debugging for stability.',
-      'Extended the system with wireless communication.',
-    ],
-    repo: null,
-    repoNote: 'A public repository was not available locally.',
-    featured: false,
   },
   {
     domain: 'embedded',
@@ -198,9 +242,12 @@ export const projectCards = [
       'Practiced branching, timing awareness, and sequencing.',
       'Strengthened comfort with code running close to hardware.',
     ],
+    images: [
+      '/images/projects/AVR-Assembly/image-1.png',
+      '/images/projects/AVR-Assembly/image-2.png',
+    ],
     repo: null,
     repoNote: 'Presented as a focused lab-style build.',
-    featured: false,
   },
   {
     domain: 'embedded',
@@ -215,9 +262,9 @@ export const projectCards = [
       'Worked through behavior at the circuit and state-transition level.',
       'Used debugging as part of the design process from the start.',
     ],
+    images: ['/images/projects/default.png'],
     repo: null,
     repoNote: 'This work is best shown as supporting visuals or notes.',
-    featured: false,
   },
   {
     domain: 'systems',
@@ -232,9 +279,9 @@ export const projectCards = [
       'Compared outcomes through system-level reasoning.',
       'Turned abstract architecture ideas into visible engineering decisions.',
     ],
+    images: ['/images/projects/default.png'],
     repo: null,
     repoNote: 'Best presented as a case-study style write-up.',
-    featured: false,
   },
   {
     domain: 'systems',
@@ -249,9 +296,9 @@ export const projectCards = [
       'Studied relationships between input, output, and time invariance.',
       'Connected mathematical analysis to engineering intuition.',
     ],
+    images: ['/images/projects/default.png'],
     repo: null,
     repoNote: 'Represented as analytical portfolio content.',
-    featured: false,
   },
   {
     domain: 'systems',
@@ -266,28 +313,35 @@ export const projectCards = [
       'Used simulation-style thinking to study broader system performance.',
       'Framed analytical work as part of a wider engineering identity.',
     ],
+    images: ['/images/projects/default.png'],
     repo: null,
     repoNote: 'Publication or notes can be added later if available.',
-    featured: false,
   },
 ]
 
 export const experience = {
-  role: 'Intern - Software Developer',
-  period: 'Recent experience',
+  role: 'Software Engineering Intern - ZILLIT',
+  period: 'Nov 2025 - Feb 2026',
   summary:
-    'Practical internship experience working on debugging, proof-of-concept delivery, and front-end development support.',
+    'Startup internship experience across desktop product development, enterprise front-end work, and production-oriented architecture decisions.',
   points: [
-    'Debugged systems using AI-assisted workflows and SQL Server Profiler.',
-    'Developed proof-of-concept solutions to validate ideas quickly.',
-    'Built front-end components using React and Vue.',
+    'Led sole development of a cross-platform POS desktop application using Electron.js and TypeScript.',
+    'Built front-end features for an enterprise financial management system using Vue.js with a Spring Boot backend.',
+    'Worked with React, TypeScript, Vue.js, Electron.js, PostgreSQL, and Docker.',
   ],
+}
+
+export const freelanceExperience = {
+  role: 'Freelance Web Developer',
+  period: '2024 - Present',
+  summary:
+    'Designed and developed business websites for local and online clients, covering UI design, branding, and front-end delivery.',
 }
 
 export const education = {
   degree: 'BSc (Hons) in Computer Systems Engineering',
   school: 'Sri Lanka Institute of Information Technology (SLIIT)',
-  period: 'Nov 2023 – Expected Nov 2027',
+  period: 'Nov 2023 - Expected Nov 2027',
 }
 
 export const interestAreas = [

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import heroImage from './assets/hero.png'
 import {
@@ -6,6 +7,7 @@ import {
   contactLinks,
   education,
   experience,
+  freelanceExperience,
   heroMetrics,
   interestAreas,
   navigationItems,
@@ -14,7 +16,35 @@ import {
   skillSections,
 } from './data/portfolio.js'
 
-const featuredProjects = projectCards.filter((project) => project.featured)
+function ProjectImageSlider({ images, title }) {
+  const slides = images?.length ? images : ['/images/projects/default.png']
+  const [activeSlide, setActiveSlide] = useState(0)
+
+  useEffect(() => {
+    if (slides.length < 2) {
+      return undefined
+    }
+
+    const slideTimer = window.setInterval(() => {
+      setActiveSlide((currentSlide) => (currentSlide + 1) % slides.length)
+    }, 3200)
+
+    return () => window.clearInterval(slideTimer)
+  }, [slides.length])
+
+  return (
+    <div className="project-image-slider">
+      <img src={slides[activeSlide]} alt={`${title} project view ${activeSlide + 1}`} />
+      {slides.length > 1 && (
+        <span className="project-slide-dots" aria-hidden="true">
+          {slides.map((image, index) => (
+            <span key={`${image}-${index}`} className={index === activeSlide ? 'active' : ''} />
+          ))}
+        </span>
+      )}
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -79,7 +109,7 @@ function App() {
               <ul className="key-facts">
                 <li>{brandProfile.location}</li>
                 <li>{brandProfile.education}</li>
-                <li>Portfolio focused on software, embedded, and control systems work</li>
+                <li>Portfolio focused on robotics, embedded systems, and control work</li>
               </ul>
             </div>
           </aside>
@@ -88,11 +118,11 @@ function App() {
         <section className="section-block" id="about">
           <div className="section-heading">
             <span className="eyebrow">About</span>
-            <h2>A focused engineering portfolio built for live use.</h2>
+            <h2>A focused engineering portfolio for embedded and robotics roles.</h2>
             <p>
-              This version trims visual excess and puts the emphasis on your
-              strengths, current training, and project work so recruiters can
-              understand your profile quickly.
+              This version puts the strongest hardware-connected work first so
+              recruiters can quickly see your robotics, control, and embedded
+              systems direction.
             </p>
           </div>
 
@@ -118,10 +148,10 @@ function App() {
         <section className="section-block" id="skills">
           <div className="section-heading">
             <span className="eyebrow">Skills</span>
-            <h2>Technical strengths across software, embedded, and systems work.</h2>
+            <h2>Technical strengths across firmware, hardware integration, and software.</h2>
             <p>
-              The layout is intentionally simple here so your core skills are
-              easy to scan in interviews and hiring reviews.
+              The layout is intentionally simple so the embedded stack, control
+              work, and supporting software skills are easy to scan.
             </p>
           </div>
 
@@ -151,71 +181,43 @@ function App() {
         <section className="section-block" id="projects">
           <div className="section-heading">
             <span className="eyebrow">Projects</span>
-            <h2>New CV projects added, existing work preserved.</h2>
+            <h2>Robotics and embedded projects first, with details on click.</h2>
             <p>
-              The project section now includes the latest control systems,
-              surveillance, and FSM work from your updated resume while keeping
-              the earlier software and embedded projects in place.
+              Each project starts as a simple title and image preview. Open one
+              to view the stack, engineering notes, and resume-aligned details.
             </p>
-          </div>
-
-          <div className="featured-projects">
-            {featuredProjects.map((project) => (
-              <article key={project.title} className="project-card featured">
-                <div className="project-head">
-                  <div>
-                    <span className="card-pill">{project.domainLabel}</span>
-                    <h3>{project.title}</h3>
-                  </div>
-                  <span className="project-type">{project.type}</span>
-                </div>
-
-                <p>{project.summary}</p>
-
-                <div className="chip-row compact">
-                  {project.stack.map((tech) => (
-                    <span key={tech}>{tech}</span>
-                  ))}
-                </div>
-
-                <ul>
-                  {project.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-
-                <p className="project-note">{project.repoNote}</p>
-              </article>
-            ))}
           </div>
 
           <div className="project-grid">
             {projectCards.map((project) => (
-              <article key={`${project.title}-${project.type}`} className="project-card">
-                <div className="project-head">
-                  <div>
+              <details key={`${project.title}-${project.type}`} className="project-card">
+                <summary className="project-preview">
+                  <ProjectImageSlider images={project.images} title={project.title} />
+                  <span className="project-preview-copy">
                     <span className="card-pill">{project.domainLabel}</span>
-                    <h3>{project.title}</h3>
+                    <strong>{project.title}</strong>
+                    <span className="project-type">{project.type}</span>
+                  </span>
+                </summary>
+
+                <div className="project-details">
+                  <p>{project.summary}</p>
+
+                  <div className="chip-row compact">
+                    {project.stack.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
                   </div>
-                  <span className="project-type">{project.type}</span>
+
+                  <ul>
+                    {project.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+
+                  <p className="project-note">{project.repoNote}</p>
                 </div>
-
-                <p>{project.summary}</p>
-
-                <div className="chip-row compact">
-                  {project.stack.map((tech) => (
-                    <span key={tech}>{tech}</span>
-                  ))}
-                </div>
-
-                <ul>
-                  {project.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-
-                <p className="project-note">{project.repoNote}</p>
-              </article>
+              </details>
             ))}
           </div>
         </section>
@@ -245,6 +247,18 @@ function App() {
                 <li key={point}>{point}</li>
               ))}
             </ul>
+          </article>
+
+          <article className="experience-card">
+            <div className="project-head">
+              <div>
+                <span className="card-pill">Freelance</span>
+                <h3>{freelanceExperience.role}</h3>
+              </div>
+              <span className="project-type">{freelanceExperience.period}</span>
+            </div>
+
+            <p>{freelanceExperience.summary}</p>
           </article>
         </section>
 
