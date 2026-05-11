@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import heroImage from './assets/hero.png'
+import heroImage from './assets/banner.png'
 import {
   aboutHighlights,
   brandProfile,
