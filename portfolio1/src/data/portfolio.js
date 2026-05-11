@@ -67,7 +67,7 @@ export const projectCards = [
     domain: 'robotics',
     domainLabel: 'Robotics',
     type: 'Autonomous robot',
-    title: 'AVR Autonomous Line-Following Car with Smart Parking',
+    title: 'AVR - Assembly Autonomous Line-Following Car with Smart Parking',
     summary:
       'An Arduino Uno robot programmed at AVR level to follow lines, detect cross-line events, search for a parking bay, and park autonomously.',
     stack: ['AVR ATmega', 'Arduino Uno', 'Microchip Studio', 'Embedded C', 'IR Sensors', 'FSM Control'],
