@@ -98,7 +98,7 @@ export const projectCards = [
       'Synchronized movement commands and live video over the ESP32 internal WiFi network.',
       'Published the web controller flow through Vercel for easier demonstration.',
     ],
-    images: ['/images/projects/esp32-cam-Fcar/image.png'],
+    images: ['/images/projects/esp32-cam-car/image.png'],
     repo: null,
     repoNote: 'Uses the default image until project-specific RC car images are added.',
   },
