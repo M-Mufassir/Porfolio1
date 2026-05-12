@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import heroImage from './assets/banner.png'
 import {
@@ -16,12 +16,15 @@ import {
   skillSections,
 } from './data/portfolio.js'
 
+const profilePhoto = '/images/Mufassir.png'
+
 function ProjectImageSlider({ images, title }) {
   const slides = images?.length ? images : ['/images/projects/default.png']
+  const hasMultipleSlides = slides.length > 1
   const [activeSlide, setActiveSlide] = useState(0)
 
   useEffect(() => {
-    if (slides.length < 2) {
+    if (!hasMultipleSlides) {
       return undefined
     }
 
@@ -30,12 +33,12 @@ function ProjectImageSlider({ images, title }) {
     }, 3200)
 
     return () => window.clearInterval(slideTimer)
-  }, [slides.length])
+  }, [hasMultipleSlides, slides.length])
 
   return (
-    <div className="project-image-slider">
+    <div className={`project-image-slider ${hasMultipleSlides ? 'has-slides' : 'single-slide'}`}>
       <img src={slides[activeSlide]} alt={`${title} project view ${activeSlide + 1}`} />
-      {slides.length > 1 && (
+      {hasMultipleSlides && (
         <span className="project-slide-dots" aria-hidden="true">
           {slides.map((image, index) => (
             <span key={`${image}-${index}`} className={index === activeSlide ? 'active' : ''} />
@@ -47,8 +50,71 @@ function ProjectImageSlider({ images, title }) {
 }
 
 function App() {
+  const [selectedProject, setSelectedProject] = useState(projectCards[0])
+  const shellRef = useRef(null)
+
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setSelectedProject(null)
+      }
+    }
+
+    window.addEventListener('keydown', handleEscape)
+
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [])
+
+  useEffect(() => {
+    const shell = shellRef.current
+
+    if (!shell || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return undefined
+    }
+
+    let animationFrame = 0
+
+    const updateParallax = (pointerX = 0, pointerY = 0) => {
+      window.cancelAnimationFrame(animationFrame)
+
+      animationFrame = window.requestAnimationFrame(() => {
+        const scrollDepth = Math.min(window.scrollY / 900, 1)
+
+        shell.style.setProperty('--parallax-x', pointerX.toFixed(3))
+        shell.style.setProperty('--parallax-y', pointerY.toFixed(3))
+        shell.style.setProperty('--parallax-scroll', scrollDepth.toFixed(3))
+      })
+    }
+
+    const handlePointerMove = (event) => {
+      const pointerX = event.clientX / window.innerWidth - 0.5
+      const pointerY = event.clientY / window.innerHeight - 0.5
+
+      updateParallax(pointerX, pointerY)
+    }
+
+    const handleScroll = () => {
+      const currentX = Number(shell.style.getPropertyValue('--parallax-x')) || 0
+      const currentY = Number(shell.style.getPropertyValue('--parallax-y')) || 0
+
+      updateParallax(currentX, currentY)
+    }
+
+    updateParallax()
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame)
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
-    <div className="site-shell">
+    <div className="site-shell" ref={shellRef}>
+      <span className="parallax-layer parallax-grid-layer" aria-hidden="true" />
+      <span className="parallax-layer parallax-trace-layer" aria-hidden="true" />
       <header className="site-header">
         <a className="brand-lockup" href="#top" aria-label="Go to top">
           <span className="brand-mark">{brandProfile.monogram}</span>
@@ -100,7 +166,8 @@ function App() {
 
           <aside className="hero-aside-panel">
             <div className="portrait-card">
-              <img src={heroImage} alt={brandProfile.name} />
+              <img className="portrait-backdrop" src={heroImage} alt="" aria-hidden="true" />
+              <img className="profile-photo" src={profilePhoto} alt={brandProfile.name} />
             </div>
 
             <div className="summary-card">
@@ -183,41 +250,72 @@ function App() {
             <span className="eyebrow">Projects</span>
             <h2>Robotics and embedded projects first, with details on click.</h2>
             <p>
-              Each project starts as a simple title and image preview. Open one
-              to view the stack, engineering notes, and resume-aligned details.
+              Each project starts as a simple title and image preview. Select one
+              to view the stack, engineering notes, and resume-aligned details above the grid.
             </p>
           </div>
 
+          {selectedProject && (
+            <article className="project-detail-layer" aria-live="polite">
+              <div className="project-detail-media">
+                <ProjectImageSlider images={selectedProject.images} title={selectedProject.title} />
+              </div>
+
+              <div className="project-detail-copy">
+                <div className="project-head">
+                  <div>
+                    <span className="card-pill">{selectedProject.domainLabel}</span>
+                    <h3>{selectedProject.title}</h3>
+                  </div>
+                  <button
+                    className="icon-button"
+                    type="button"
+                    aria-label="Close project details"
+                    onClick={() => setSelectedProject(null)}
+                  >
+                    x
+                  </button>
+                </div>
+
+                <p>{selectedProject.summary}</p>
+
+                <div className="chip-row compact">
+                  {selectedProject.stack.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+
+                <ul>
+                  {selectedProject.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+
+                <p className="project-note">{selectedProject.repoNote}</p>
+              </div>
+            </article>
+          )}
+
           <div className="project-grid">
             {projectCards.map((project) => (
-              <details key={`${project.title}-${project.type}`} className="project-card">
-                <summary className="project-preview">
+              <article
+                key={`${project.title}-${project.type}`}
+                className={`project-card ${selectedProject?.title === project.title ? 'is-active' : ''}`}
+              >
+                <button
+                  className="project-preview"
+                  type="button"
+                  aria-expanded={selectedProject?.title === project.title}
+                  onClick={() => setSelectedProject(project)}
+                >
                   <ProjectImageSlider images={project.images} title={project.title} />
                   <span className="project-preview-copy">
                     <span className="card-pill">{project.domainLabel}</span>
                     <strong>{project.title}</strong>
                     <span className="project-type">{project.type}</span>
                   </span>
-                </summary>
-
-                <div className="project-details">
-                  <p>{project.summary}</p>
-
-                  <div className="chip-row compact">
-                    {project.stack.map((tech) => (
-                      <span key={tech}>{tech}</span>
-                    ))}
-                  </div>
-
-                  <ul>
-                    {project.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-
-                  <p className="project-note">{project.repoNote}</p>
-                </div>
-              </details>
+                </button>
+              </article>
             ))}
           </div>
         </section>
