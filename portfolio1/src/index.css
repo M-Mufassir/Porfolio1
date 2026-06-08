@@ -1,26 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700;800&display=swap");
 
 :root {
-  font-family: 'Sora', 'Segoe UI', sans-serif;
-  line-height: 1.5;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
   font-weight: 400;
   color: #f8fbff;
-  background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.16), transparent 26%),
-    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.14), transparent 30%),
-    linear-gradient(180deg, #030712 0%, #040914 48%, #030712 100%);
+  background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+  background-attachment: fixed;
   color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --text-strong: #f8fbff;
-  --text-soft: #b8c6df;
-  --text-muted: #7f92b3;
+  --text-soft: #cbd5e1;
+  --text-muted: #94a3b8;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 *,
@@ -33,20 +38,16 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  color: var(--text-strong);
+  color: var(--text-soft);
   background: transparent;
+  overflow-x: hidden;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
-  background-size: 4rem 4rem;
-  mask-image: radial-gradient(circle at center, black 38%, transparent 92%);
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 a,
@@ -66,12 +67,12 @@ h2,
 h3,
 h4,
 strong {
-  font-family: 'Sora', 'Segoe UI', sans-serif;
+  font-family: "Sora", "Segoe UI", sans-serif;
 }
 
 code,
 .brand-mark {
-  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
 }
 
 img {
