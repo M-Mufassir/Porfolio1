@@ -6,6 +6,7 @@ import {
   contactLinks,
   education,
   experience,
+  experiences,
   freelanceExperience,
   heroMetrics,
   interestAreas,
@@ -123,6 +124,7 @@ function App() {
           setSelectedProject={setSelectedProject}
         />
         <Experience
+          experiences={experiences}
           experience={experience}
           freelanceExperience={freelanceExperience}
           resumeLink={resumeLink}

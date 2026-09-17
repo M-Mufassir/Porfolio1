@@ -1,63 +1,60 @@
-export function Experience({ experience, freelanceExperience, resumeLink }) {
+export function Experience({ experiences, experience, freelanceExperience, resumeLink }) {
+  // Support both new `experiences` array and legacy props
+  const experienceList = experiences || [
+    experience,
+    freelanceExperience,
+  ].filter(Boolean)
+
   return (
     <>
       <section className="section-block" id="experience">
         <div className="section-heading">
-          <span className="section-eyebrow">Experience</span>
-          <h2 className="section-title">Industry & Practical Execution</h2>
+          <span className="section-eyebrow">Experience & Leadership</span>
+          <h2 className="section-title">Industry, Entrepreneurship & Practical Execution</h2>
           <p className="section-subtitle">
-            Applying engineering rigor to production products, real-world systems, and client solutions.
+            Applying engineering rigor to telecommunications infrastructure, startup venture leadership, production software, and client solutions.
           </p>
         </div>
 
         <div className="timeline-container">
-          {/* Item 1: Internship */}
-          <article className="timeline-item">
-            <div className="timeline-marker" aria-hidden="true">
-              <div className="timeline-dot" />
-              <div className="timeline-line" />
-            </div>
+          {experienceList.map((item, index) => {
+            const isLast = index === experienceList.length - 1
 
-            <div className="timeline-card">
-              <div className="timeline-card-header">
-                <div>
-                  <span className="card-pill">Internship</span>
-                  <h3 className="timeline-role">{experience.role}</h3>
+            return (
+              <article key={`${item.role}-${item.period}`} className="timeline-item">
+                <div className="timeline-marker" aria-hidden="true">
+                  <div className="timeline-dot" />
+                  {!isLast && <div className="timeline-line" />}
                 </div>
-                <span className="timeline-period">{experience.period}</span>
-              </div>
 
-              <p className="timeline-summary">{experience.summary}</p>
+                <div className="timeline-card">
+                  <div className="timeline-card-header">
+                    <div>
+                      <div className="timeline-badge-row">
+                        <span className="card-pill">{item.category || 'Role'}</span>
+                        {item.company && <span className="timeline-company">{item.company}</span>}
+                      </div>
+                      <h3 className="timeline-role">{item.role}</h3>
+                    </div>
+                    <span className="timeline-period">{item.period}</span>
+                  </div>
 
-              <ul className="timeline-points">
-                {experience.points.map((point) => (
-                  <li key={point} className="timeline-point">
-                    <span className="point-bullet" aria-hidden="true">✦</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </article>
+                  <p className="timeline-summary">{item.summary}</p>
 
-          {/* Item 2: Freelance */}
-          <article className="timeline-item">
-            <div className="timeline-marker" aria-hidden="true">
-              <div className="timeline-dot" />
-            </div>
-
-            <div className="timeline-card">
-              <div className="timeline-card-header">
-                <div>
-                  <span className="card-pill">Freelance</span>
-                  <h3 className="timeline-role">{freelanceExperience.role}</h3>
+                  {item.points && item.points.length > 0 && (
+                    <ul className="timeline-points">
+                      {item.points.map((point) => (
+                        <li key={point} className="timeline-point">
+                          <span className="point-bullet" aria-hidden="true">✦</span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <span className="timeline-period">{freelanceExperience.period}</span>
-              </div>
-
-              <p className="timeline-summary">{freelanceExperience.summary}</p>
-            </div>
-          </article>
+              </article>
+            )
+          })}
         </div>
       </section>
 
@@ -68,7 +65,7 @@ export function Experience({ experience, freelanceExperience, resumeLink }) {
             <span className="section-eyebrow">Curriculum Vitae</span>
             <h2 className="resume-banner-title">Engineering Resume & Credentials</h2>
             <p className="resume-banner-desc">
-              Looking for a comprehensive technical breakdown of my academic coursework, robotics hardware builds, and software experience? Download the latest verified CV.
+              Looking for a comprehensive technical breakdown of my academic coursework, robotics hardware builds, telecommunications training, and software experience? Download the latest verified CV.
             </p>
           </div>
 

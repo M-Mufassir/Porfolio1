@@ -10,19 +10,19 @@ export const navigationItems = [
 export const brandProfile = {
   name: 'Mohamed Mufassir',
   monogram: 'MM',
-  title: 'Computer Systems Engineering Undergraduate',
-  tagline: 'Embedded Systems, Robotics, and Real-Time Control',
+  title: 'Computer Systems Engineering Undergraduate | Co-Founder @ TechTitude Labs',
+  tagline: 'Embedded Systems, Robotics, IoT & Telecommunication',
   summary:
-    'I build intelligent hardware-software systems, from AVR-programmed autonomous robots to IoT-connected vehicles and real-time control systems.',
+    'Computer Systems Engineering undergraduate at SLIIT, Co-Founder of TechTitude Labs, and Intern in Fiber Project Management. Passionate about building intelligent hardware-software systems, embedded firmware, robotics, and telecom infrastructure.',
   location: 'Thihariya, Sri Lanka',
   education: 'BSc (Hons) in Computer Systems Engineering, SLIIT',
-  availability: 'Open to internships, graduate roles, and engineering collaborations',
+  availability: 'Intern - Fiber Project Management | Co-Founder @ TechTitude Labs',
 }
 
 export const heroMetrics = [
-  { label: 'Focus', value: 'Embedded, robotics, real-time control' },
-  { label: 'Education', value: 'SLIIT - 2023 to 2027' },
-  { label: 'Tools', value: 'AVR, ESP32-CAM, Raspberry Pi, Python' },
+  { label: 'Focus', value: 'Embedded, Robotics & Telecom' },
+  { label: 'Venture', value: 'Co-Founder @ TechTitude Labs' },
+  { label: 'Education', value: 'SLIIT (2023 — 2027)' },
 ]
 
 export const aboutHighlights = [
@@ -37,27 +37,27 @@ export const aboutHighlights = [
       'My strongest project work sits around autonomous behaviour, PID control, live telemetry, and practical hardware integration.',
   },
   {
-    title: 'Hands-on debugging and iteration',
+    title: 'Leadership & Entrepreneurship',
     description:
-      'I am comfortable moving between code, hardware, and system behavior to diagnose issues and improve performance.',
+      'As Co-Founder of TechTitude Labs, I drive hands-on hardware innovation, robotics prototyping, and engineering solutions.',
   },
 ]
 
 export const skillSections = [
   {
     title: 'Programming',
-    items: ['C', 'Embedded C', 'AVR Assembly', 'Python', 'JavaScript', 'TypeScript'],
+    items: ['C', 'Embedded C', 'AVR Assembly', 'Python', 'JavaScript', 'TypeScript', 'Java'],
   },
   {
-    title: 'Embedded and Robotics',
-    items: ['AVR (ATmega)', 'Arduino Uno', 'ESP32-CAM', 'Raspberry Pi', 'Sensors and Actuators'],
+    title: 'Embedded, Robotics & Telecom',
+    items: ['AVR (ATmega)', 'Arduino Uno', 'ESP32-CAM', 'Raspberry Pi', 'Fiber Optics', 'Sensors & Actuators'],
   },
   {
-    title: 'Protocols and Control',
-    items: ['PID Control', 'FSM Design', 'UART', 'SPI', 'I2C', 'WiFi/HTTP Streaming'],
+    title: 'Protocols & Control',
+    items: ['PID Control', 'FSM Design', 'UART', 'SPI', 'I2C', 'WiFi/HTTP Streaming', 'Optical Networks'],
   },
   {
-    title: 'Software and Tools',
+    title: 'Software & Tools',
     items: ['React', 'Vue.js', 'Electron.js', 'Spring Boot', 'PostgreSQL', 'Docker', 'Git'],
   },
 ]
@@ -122,7 +122,7 @@ export const projectCards = [
       '/images/projects/PID/PID-3.png',
     ],
     repo: null,
-    repoNote: 'Based on the latest uploaded CV.',
+    repoNote: 'Based on the latest verified project builds.',
   },
   {
     domain: 'embedded',
@@ -140,7 +140,7 @@ export const projectCards = [
     ],
     images: ['/images/projects/Surveillance-System/image.png'],
     repo: null,
-    repoNote: 'Based on the latest uploaded CV.',
+    repoNote: 'ESP32 firmware integrated with Telegram cloud bot.',
   },
   {
     domain: 'systems',
@@ -162,7 +162,7 @@ export const projectCards = [
       '/images/projects/FSM-Sequence-detector/3.png',
     ],
     repo: null,
-    repoNote: 'Based on the latest uploaded CV.',
+    repoNote: 'Digital logic and state machine verification.',
   },
   {
     domain: 'software',
@@ -171,7 +171,7 @@ export const projectCards = [
     title: 'Learning Management System',
     summary:
       'A Spring Boot based learning platform with backend APIs for authentication, course management, and scalable data handling.',
-    stack: ['Spring Boot', 'Java', 'REST APIs', 'Database Integration'],
+    stack: ['Spring Boot', 'Java', 'REST APIs', 'PostgreSQL', 'JWT Auth'],
     points: [
       'Developed backend APIs for authentication and course management.',
       'Integrated the database layer with a scalable service structure.',
@@ -183,7 +183,7 @@ export const projectCards = [
       '/images/projects/LMS/image-2.png',
     ],
     repo: null,
-    repoNote: 'Project details updated from the latest uploaded CV.',
+    repoNote: 'Spring Boot REST backend architecture.',
   },
   {
     domain: 'software',
@@ -205,7 +205,7 @@ export const projectCards = [
       '/images/projects/POS/4.png',
     ],
     repo: null,
-    repoNote: 'Repository link can be added when the public repo is ready.',
+    repoNote: 'Production desktop software built with Electron & TypeScript.',
   },
   {
     domain: 'software',
@@ -227,7 +227,7 @@ export const projectCards = [
       '/images/projects/personal-website/4.png',
     ],
     repo: null,
-    repoNote: 'Case-study links can be added for selected client work.',
+    repoNote: 'Client production web applications.',
   },
   {
     domain: 'embedded',
@@ -247,7 +247,7 @@ export const projectCards = [
       '/images/projects/LED-Blink/2.jpeg',
     ],
     repo: null,
-    repoNote: 'Presented as a focused lab-style build.',
+    repoNote: 'Low-level assembly register manipulation.',
   },
   {
     domain: 'embedded',
@@ -262,94 +262,109 @@ export const projectCards = [
       'Worked through behavior at the circuit and state-transition level.',
       'Used debugging as part of the design process from the start.',
     ],
-    images: ['/images/projects/PCB-and-Digital-Systems/1.png','/images/projects/PCB-and-Digital-Systems/2.png','/images/projects/PCB-and-Digital-Systems/3.png','/images/projects/PCB-and-Digital-Systems/image.png'],
+    images: [
+      '/images/projects/PCB-and-Digital-Systems/1.png',
+      '/images/projects/PCB-and-Digital-Systems/2.png',
+      '/images/projects/PCB-and-Digital-Systems/3.png',
+      '/images/projects/PCB-and-Digital-Systems/image.png',
+    ],
     repo: null,
-    repoNote: 'This work is best shown as supporting visuals or notes.',
+    repoNote: 'Schematic, PCB layout, and bench testing.',
   },
   {
     domain: 'systems',
-    domainLabel: 'Systems and Analysis',
-    type: 'Architecture study',
-    title: 'Cache System Simulation',
+    domainLabel: 'Systems & Telecommunications',
+    type: 'Telecommunication & Signal Analysis',
+    title: 'Telecommunication & Signal Analysis Research',
     summary:
-      'A computer architecture study centered on memory hierarchy behavior and performance tradeoffs.',
-    stack: ['Caching', 'COA Concepts', 'Performance Analysis'],
+      'Analytical and simulation work around communication models, signal transmission, modulation, and optical/wireless networks.',
+    stack: ['Telecommunications', 'Fiber Optics', 'Signal Processing', 'Simulation'],
     points: [
-      'Simulated cache behavior to study speed and efficiency tradeoffs.',
-      'Compared outcomes through system-level reasoning.',
-      'Turned abstract architecture ideas into visible engineering decisions.',
+      'Explored communication flows, optical signal transmission, and modulation techniques.',
+      'Studied discrete-time systems and LTI behavior with convolution and impulse response.',
+      'Connected theoretical communication models to real-world optical network infrastructure.',
     ],
-    images: ['/images/projects/cache-design/image.png'],
-    repo: null,
-    repoNote: 'Best presented as a case-study style write-up.',
-  },
-  {
-    domain: 'systems',
-    domainLabel: 'Systems and Analysis',
-    type: 'Signal analysis',
-    title: 'Discrete-Time Signal System Analysis',
-    summary:
-      'A study of discrete-time systems and LTI behavior using convolution and impulse-response techniques.',
-    stack: ['Signals', 'LTI Systems', 'Convolution', 'Analysis'],
-    points: [
-      'Analyzed system behavior through impulse-response reasoning.',
-      'Studied relationships between input, output, and time invariance.',
-      'Connected mathematical analysis to engineering intuition.',
+    images: [
+      '/images/projects/telecommunication/image.png',
+      '/images/projects/Signal-and-system/image.png',
+      '/images/projects/cache-design/image.png',
     ],
-    images: ['/images/projects/Signal-and-system/image.png'],
     repo: null,
-    repoNote: 'Represented as analytical portfolio content.',
-  },
-  {
-    domain: 'systems',
-    domainLabel: 'Systems and Analysis',
-    type: 'Research track',
-    title: 'Telecommunication Research',
-    summary:
-      'Analytical work around communication models, signal transmission, and system interaction.',
-    stack: ['Telecommunications', 'System Modeling', 'Simulation'],
-    points: [
-      'Explored communication flow and transmission behavior.',
-      'Used simulation-style thinking to study broader system performance.',
-      'Framed analytical work as part of a wider engineering identity.',
-    ],
-    images: ['/images/projects/telecommunication/image.png'],
-    repo: null,
-    repoNote: 'Publication or notes can be added later if available.',
+    repoNote: 'Telecom & signal systems research.',
   },
 ]
 
-export const experience = {
-  role: 'Software Engineering Intern - ZILLIT',
-  period: 'Nov 2025 - Feb 2026',
-  summary:
-    'Startup internship experience across desktop product development, enterprise front-end work, and production-oriented architecture decisions.',
-  points: [
-    'Led sole development of a cross-platform POS desktop application using Electron.js and TypeScript.',
-    'Built front-end features for an enterprise financial management system using Vue.js with a Spring Boot backend.',
-    'Worked with React, TypeScript, Vue.js, Electron.js, PostgreSQL, and Docker.',
-  ],
-}
+export const experiences = [
+  {
+    category: 'Telecommunications',
+    role: 'Intern - Fiber Project Management',
+    company: 'Telecom Infrastructure',
+    period: '2026 — Present',
+    summary:
+      'Hands-on exposure to optical fiber infrastructure planning, project coordination, route feasibility, and telecommunication network rollout.',
+    points: [
+      'Assisting in optical fiber rollout planning, site survey analysis, and project execution tracking.',
+      'Coordinating field milestones, resource allocation, and telecommunications infrastructure reporting.',
+      'Deepening practical knowledge in optical transmission networks, splicing standards, and telecom lifecycle management.',
+    ],
+  },
+  {
+    category: 'Venture & Leadership',
+    role: 'Co-Founder & Tech Lead',
+    company: 'TechTitude Labs',
+    period: '2024 — Present',
+    summary:
+      'Co-founded TechTitude Labs to engineer innovative embedded systems, robotics platforms, IoT hardware, and custom software solutions.',
+    points: [
+      'Leading R&D for autonomous robotics, IoT hardware prototypes, and embedded control systems.',
+      'Directing end-to-end product architecture from schematic and firmware development to client deployment.',
+      'Conducting technical workshops and mentoring students in embedded C, microcontroller programming, and robotics.',
+    ],
+  },
+  {
+    category: 'Software Engineering',
+    role: 'Software Engineering Intern',
+    company: 'ZILLIT Technologies',
+    period: 'Nov 2025 — Feb 2026',
+    summary:
+      'Startup internship experience across cross-platform desktop application engineering, enterprise front-end systems, and production architecture.',
+    points: [
+      'Led sole development of a cross-platform POS desktop application using Electron.js and TypeScript.',
+      'Built front-end features for an enterprise financial management system using Vue.js with a Spring Boot backend.',
+      'Worked with React, TypeScript, Vue.js, Electron.js, PostgreSQL, and Docker.',
+    ],
+  },
+  {
+    category: 'Freelance',
+    role: 'Freelance Web Developer',
+    company: 'Self-Employed',
+    period: '2024 — Present',
+    summary:
+      'Designed and delivered high-performance business websites and digital solutions for local and international clients.',
+    points: [
+      'Developed and launched responsive websites for retail stores, restaurants, and booking systems.',
+      'Handled complete project lifecycle from UI/UX design and wireframing to React frontend implementation.',
+    ],
+  },
+]
 
-export const freelanceExperience = {
-  role: 'Freelance Web Developer',
-  period: '2024 - Present',
-  summary:
-    'Designed and developed business websites for local and online clients, covering UI design, branding, and front-end delivery.',
-}
+// For backwards compatibility
+export const experience = experiences[2]
+export const freelanceExperience = experiences[3]
 
 export const education = {
   degree: 'BSc (Hons) in Computer Systems Engineering',
   school: 'Sri Lanka Institute of Information Technology (SLIIT)',
-  period: 'Nov 2023 - Expected Nov 2027',
+  period: 'Nov 2023 — Expected Nov 2027',
 }
 
 export const interestAreas = [
-  'Embedded Systems',
-  'Robotics',
-  'Control Systems',
-  'IoT',
-  'Industrial Electronics',
+  'Embedded Systems & Firmware',
+  'Robotics & Autonomous Control',
+  'Optical Fiber & Telecommunications',
+  'IoT & Edge Computing',
+  'Real-Time Systems',
+  'Digital Systems Design',
 ]
 
 export const resumeLink = {
@@ -361,7 +376,7 @@ export const contactLinks = [
   {
     label: 'Email',
     value: 'mufassirriswan@gmail.com',
-    note: 'Best for internships, graduate roles, and direct collaboration.',
+    note: 'Direct email for internships, roles, and engineering collaborations.',
     href: 'mailto:mufassirriswan@gmail.com',
     action: 'Send an email',
   },
@@ -375,7 +390,7 @@ export const contactLinks = [
   {
     label: 'GitHub',
     value: 'github.com/M-Mufassir',
-    note: 'Code samples and public project work.',
+    note: 'Public repositories, firmware, and code samples.',
     href: 'https://github.com/M-Mufassir/',
     action: 'Open GitHub',
   },
