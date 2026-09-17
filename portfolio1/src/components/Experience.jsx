@@ -3,57 +3,83 @@ export function Experience({ experience, freelanceExperience, resumeLink }) {
     <>
       <section className="section-block" id="experience">
         <div className="section-heading">
-          <span className="eyebrow">Experience</span>
-          <h2>Practical delivery backed by debugging and iteration.</h2>
-          <p>
-            This keeps your portfolio grounded in execution, not just coursework or concepts.
+          <span className="section-eyebrow">Experience</span>
+          <h2 className="section-title">Industry & Practical Execution</h2>
+          <p className="section-subtitle">
+            Applying engineering rigor to production products, real-world systems, and client solutions.
           </p>
         </div>
 
-        <article className="experience-card">
-          <div className="project-head">
-            <div>
-              <span className="card-pill">Recent role</span>
-              <h3>{experience.role}</h3>
+        <div className="timeline-container">
+          {/* Item 1: Internship */}
+          <article className="timeline-item">
+            <div className="timeline-marker" aria-hidden="true">
+              <div className="timeline-dot" />
+              <div className="timeline-line" />
             </div>
-            <span className="project-type">{experience.period}</span>
-          </div>
 
-          <p>{experience.summary}</p>
-          <ul>
-            {experience.points.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-          </ul>
-        </article>
+            <div className="timeline-card">
+              <div className="timeline-card-header">
+                <div>
+                  <span className="card-pill">Internship</span>
+                  <h3 className="timeline-role">{experience.role}</h3>
+                </div>
+                <span className="timeline-period">{experience.period}</span>
+              </div>
 
-        <article className="experience-card">
-          <div className="project-head">
-            <div>
-              <span className="card-pill">Freelance</span>
-              <h3>{freelanceExperience.role}</h3>
+              <p className="timeline-summary">{experience.summary}</p>
+
+              <ul className="timeline-points">
+                {experience.points.map((point) => (
+                  <li key={point} className="timeline-point">
+                    <span className="point-bullet" aria-hidden="true">✦</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <span className="project-type">{freelanceExperience.period}</span>
-          </div>
+          </article>
 
-          <p>{freelanceExperience.summary}</p>
-        </article>
+          {/* Item 2: Freelance */}
+          <article className="timeline-item">
+            <div className="timeline-marker" aria-hidden="true">
+              <div className="timeline-dot" />
+            </div>
+
+            <div className="timeline-card">
+              <div className="timeline-card-header">
+                <div>
+                  <span className="card-pill">Freelance</span>
+                  <h3 className="timeline-role">{freelanceExperience.role}</h3>
+                </div>
+                <span className="timeline-period">{freelanceExperience.period}</span>
+              </div>
+
+              <p className="timeline-summary">{freelanceExperience.summary}</p>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <section className="section-block" id="resume">
-        <div className="resume-banner">
-          <div className="section-heading compact">
-            <span className="eyebrow">Resume</span>
-            <h2>One updated resume, directly connected to the live site.</h2>
-            <p>
-              The download now uses your latest uploaded CV only, which keeps the portfolio
-              cleaner and more professional.
+      {/* Resume Section Banner */}
+      <section className="section-block resume-section" id="resume">
+        <div className="resume-banner-card">
+          <div className="resume-banner-content">
+            <span className="section-eyebrow">Curriculum Vitae</span>
+            <h2 className="resume-banner-title">Engineering Resume & Credentials</h2>
+            <p className="resume-banner-desc">
+              Looking for a comprehensive technical breakdown of my academic coursework, robotics hardware builds, and software experience? Download the latest verified CV.
             </p>
           </div>
 
-          <a className="button primary" href={resumeLink.href} download>
-            {resumeLink.label}
-          </a>
+          <div className="resume-banner-action">
+            <a className="button primary-btn resume-download-btn" href={resumeLink.href} download>
+              <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true">
+                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              <span>{resumeLink.label}</span>
+            </a>
+          </div>
         </div>
       </section>
     </>
