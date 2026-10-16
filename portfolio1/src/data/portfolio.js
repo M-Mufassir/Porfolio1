@@ -9,43 +9,43 @@ export const navigationItems = [
 
 export const brandProfile = {
   name: 'Mohamed Mufassir',
-  monogram: 'MM',
+  monogram: 'M',
   title: 'Computer Systems Engineering Undergraduate | Co-Founder @ TechTitude Labs',
-  tagline: 'Embedded Systems, Robotics, IoT & Telecommunication',
+  tagline: 'Embedded Systems, Autonomous Robotics & Telecommunication Infrastructure',
   summary:
-    'Computer Systems Engineering undergraduate at SLIIT, Co-Founder of TechTitude Labs, and Intern in Fiber Project Management. Passionate about building intelligent hardware-software systems, embedded firmware, robotics, and telecom infrastructure.',
+    'Computer Systems Engineering undergraduate at SLIIT and Co-Founder of TechTitude Labs. Specializing in bare-metal firmware, closed-loop control systems, autonomous robotics, and fiber optics infrastructure to engineer dependable, real-world solutions.',
   location: 'Thihariya, Sri Lanka',
   education: 'BSc (Hons) in Computer Systems Engineering, SLIIT',
-  availability: 'Intern - Fiber Project Management | Co-Founder @ TechTitude Labs',
+  availability: 'Open for Engineering Opportunities & Collaborations',
 }
 
 export const heroMetrics = [
-  { label: 'Focus', value: 'Embedded, Robotics & Telecom' },
+  { label: 'Specialization', value: 'Embedded & Autonomous Systems' },
   { label: 'Venture', value: 'Co-Founder @ TechTitude Labs' },
-  { label: 'Education', value: 'SLIIT (2023 — 2027)' },
+  { label: 'Academic Base', value: 'SLIIT (2023 — 2027)' },
 ]
 
 export const aboutHighlights = [
   {
-    title: 'Embedded and real-time systems',
+    title: 'Bare-Metal & Real-Time Firmware',
     description:
-      'I enjoy building systems that combine sensing, control logic, and device-level programming into dependable engineering solutions.',
+      'Architecting deterministic microcontroller firmware through register-level programming, interrupt-driven design, and optimized low-level Embedded C and AVR Assembly.',
   },
   {
-    title: 'Robotics and control focus',
+    title: 'Autonomous Robotics & Control Dynamics',
     description:
-      'My strongest project work sits around autonomous behaviour, PID control, live telemetry, and practical hardware integration.',
+      'Developing closed-loop PID controllers, sensor fusion logic, finite state machine intelligence, and low-latency wireless telemetry for autonomous navigation.',
   },
   {
-    title: 'Leadership & Entrepreneurship',
+    title: 'Venture Leadership & Rapid Prototyping',
     description:
-      'As Co-Founder of TechTitude Labs, I drive hands-on hardware innovation, robotics prototyping, and engineering solutions.',
+      'Spearheading hardware R&D and engineering client solutions at TechTitude Labs — guiding products from schematic design and breadboarding to field-tested deployments.',
   },
 ]
 
 export const skillSections = [
   {
-    title: 'Programming',
+    title: 'Core Programming',
     items: ['C', 'Embedded C', 'AVR Assembly', 'Python', 'JavaScript', 'TypeScript', 'Java'],
   },
   {
@@ -53,11 +53,11 @@ export const skillSections = [
     items: ['AVR (ATmega)', 'Arduino Uno', 'ESP32-CAM', 'Raspberry Pi', 'Fiber Optics', 'Sensors & Actuators'],
   },
   {
-    title: 'Protocols & Control',
+    title: 'Protocols & Control Dynamics',
     items: ['PID Control', 'FSM Design', 'UART', 'SPI', 'I2C', 'WiFi/HTTP Streaming', 'Optical Networks'],
   },
   {
-    title: 'Software & Tools',
+    title: 'Software Platforms & DevOps',
     items: ['React', 'Vue.js', 'Electron.js', 'Spring Boot', 'PostgreSQL', 'Docker', 'Git'],
   },
 ]
@@ -66,10 +66,10 @@ export const projectCards = [
   {
     domain: 'robotics',
     domainLabel: 'Robotics',
-    type: 'Autonomous robot',
+    type: 'Autonomous Robot',
     title: 'AVR - Assembly Autonomous Line-Following Car with Smart Parking',
     summary:
-      'An Arduino Uno robot programmed at AVR level to follow lines, detect cross-line events, search for a parking bay, and park autonomously.',
+      'An Arduino Uno robot programmed at AVR assembly level to follow lines, detect cross-line events, search for a parking bay, and park autonomously.',
     stack: ['AVR ATmega', 'Arduino Uno', 'Microchip Studio', 'Embedded C', 'IR Sensors', 'FSM Control'],
     points: [
       'Programmed line tracking and cross-line detection logic using three IR sensors.',
@@ -82,12 +82,12 @@ export const projectCards = [
       '/images/projects/AVR-Assembly/image-2.png',
     ],
     repo: null,
-    repoNote: 'Featured first to align the portfolio with embedded and robotics roles.',
+    systemHighlight: 'Bare-metal AVR assembly implementation with sub-millisecond interrupt response and autonomous FSM parking routines.',
   },
   {
     domain: 'robotics',
-    domainLabel: 'Robotics and IoT',
-    type: 'Live video vehicle',
+    domainLabel: 'Robotics & IoT',
+    type: 'Live Video Vehicle',
     title: 'ESP32-CAM Remote-Controlled Car with Live Video Streaming',
     summary:
       'A WiFi-controlled RC car where the ESP32-CAM acts as both access point and video server for real-time driving and camera feedback.',
@@ -100,12 +100,12 @@ export const projectCards = [
     ],
     images: ['/images/projects/esp32-cam-car/image.png'],
     repo: null,
-    repoNote: 'Uses the default image until project-specific RC car images are added.',
+    systemHighlight: 'Dual-core ESP32 pipeline decoupling live MJPEG video streaming from low-latency motor control commands.',
   },
   {
     domain: 'embedded',
     domainLabel: 'Embedded Systems',
-    type: 'Control system',
+    type: 'Control System',
     title: 'PID-Based DC Motor Speed Control System',
     summary:
       'A Raspberry Pi based real-time closed-loop motor control project focused on precise speed regulation and tuning.',
@@ -122,12 +122,12 @@ export const projectCards = [
       '/images/projects/PID/PID-3.png',
     ],
     repo: null,
-    repoNote: 'Based on the latest verified project builds.',
+    systemHighlight: 'Real-time closed-loop speed regulation with high-resolution encoder sampling and live desktop telemetry visualization.',
   },
   {
     domain: 'embedded',
     domainLabel: 'Embedded Systems',
-    type: 'IoT security',
+    type: 'IoT Security',
     title: 'IoT Smart Surveillance and Access Control System',
     summary:
       'An ESP32-based surveillance and access workflow with real-time alerts, image capture, and remote door control.',
@@ -140,12 +140,12 @@ export const projectCards = [
     ],
     images: ['/images/projects/Surveillance-System/image.png'],
     repo: null,
-    repoNote: 'ESP32 firmware integrated with Telegram cloud bot.',
+    systemHighlight: 'Edge-triggered camera surveillance integrated with real-time Telegram cloud bot commands and solenoid locking.',
   },
   {
     domain: 'systems',
     domainLabel: 'Digital Systems',
-    type: 'FSM design',
+    type: 'FSM Design',
     title: 'FSM-Based Sequence Detector',
     summary:
       'A digital systems project combining pseudo-random generation, serialization, and finite state machine pattern detection.',
@@ -162,12 +162,12 @@ export const projectCards = [
       '/images/projects/FSM-Sequence-detector/3.png',
     ],
     repo: null,
-    repoNote: 'Digital logic and state machine verification.',
+    systemHighlight: 'Clock-synchronized synchronous sequential logic with LFSR pseudo-random bitstream generation and PISO shift serialization.',
   },
   {
     domain: 'software',
     domainLabel: 'Software Engineering',
-    type: 'Backend platform',
+    type: 'Backend Platform',
     title: 'Learning Management System',
     summary:
       'A Spring Boot based learning platform with backend APIs for authentication, course management, and scalable data handling.',
@@ -183,12 +183,12 @@ export const projectCards = [
       '/images/projects/LMS/image-2.png',
     ],
     repo: null,
-    repoNote: 'Spring Boot REST backend architecture.',
+    systemHighlight: 'Multi-tiered enterprise REST backend with JWT authentication, role-based access control, and PostgreSQL persistence.',
   },
   {
     domain: 'software',
     domainLabel: 'Software Engineering',
-    type: 'Desktop product',
+    type: 'Desktop Product',
     title: 'Desktop POS System',
     summary:
       'A cross-platform desktop point-of-sale system focused on inventory management, sales flow, and a modular product structure.',
@@ -205,15 +205,15 @@ export const projectCards = [
       '/images/projects/POS/4.png',
     ],
     repo: null,
-    repoNote: 'Production desktop software built with Electron & TypeScript.',
+    systemHighlight: 'Cross-platform desktop application built for offline-first transactional integrity, receipt printing, and real-time inventory management.',
   },
   {
     domain: 'software',
     domainLabel: 'Software Engineering',
-    type: 'Web build',
-    title: 'Business Website Development',
+    type: 'Web Application',
+    title: 'Commercial Business Web Applications',
     summary:
-      'Business-facing websites for local clients, including retail, restaurant, and booking-platform style work.',
+      'Production-grade websites for retail, restaurant, and booking platforms with tailored design systems and high-converting UX.',
     stack: ['React', 'HTML/CSS', 'JavaScript', 'Responsive Design'],
     points: [
       'Designed and developed websites for a jewelry shop, hardware store, restaurant, and indoor playground booking platform.',
@@ -227,12 +227,12 @@ export const projectCards = [
       '/images/projects/personal-website/4.png',
     ],
     repo: null,
-    repoNote: 'Client production web applications.',
+    systemHighlight: 'High-conversion, SEO-optimized digital web applications engineered with modern component hierarchies and fluid responsive styling.',
   },
   {
     domain: 'embedded',
     domainLabel: 'Embedded Systems',
-    type: 'Low-level control',
+    type: 'Low-Level Control',
     title: 'AVR LED Control Using Assembly',
     summary:
       'A low-level microcontroller exercise focused on direct hardware control and instruction-level reasoning.',
@@ -247,12 +247,12 @@ export const projectCards = [
       '/images/projects/LED-Blink/2.jpeg',
     ],
     repo: null,
-    repoNote: 'Low-level assembly register manipulation.',
+    systemHighlight: 'Direct hardware port manipulation, precise software timing delays, and register-level execution on ATmega architecture.',
   },
   {
     domain: 'embedded',
     domainLabel: 'Embedded Systems',
-    type: 'Electronics build',
+    type: 'Electronics Build',
     title: 'PCB and Digital Systems Prototyping',
     summary:
       'Hands-on hardware prototyping spanning PCB thinking, digital logic, simulation, and bench-level iteration.',
@@ -269,12 +269,12 @@ export const projectCards = [
       '/images/projects/PCB-and-Digital-Systems/image.png',
     ],
     repo: null,
-    repoNote: 'Schematic, PCB layout, and bench testing.',
+    systemHighlight: 'End-to-end hardware development covering schematic capture, digital logic simulation, PCB layout, and bench oscilloscope validation.',
   },
   {
     domain: 'systems',
     domainLabel: 'Systems & Telecommunications',
-    type: 'Telecommunication & Signal Analysis',
+    type: 'Signal Analysis',
     title: 'Telecommunication & Signal Analysis Research',
     summary:
       'Analytical and simulation work around communication models, signal transmission, modulation, and optical/wireless networks.',
@@ -290,7 +290,7 @@ export const projectCards = [
       '/images/projects/cache-design/image.png',
     ],
     repo: null,
-    repoNote: 'Telecom & signal systems research.',
+    systemHighlight: 'Analytical modeling of optical attenuation, fiber dispersion limits, LTI convolution, and digital signal modulation schemes.',
   },
 ]
 
@@ -301,7 +301,7 @@ export const experiences = [
     company: 'Telecom Infrastructure',
     period: '2026 — Present',
     summary:
-      'Hands-on exposure to optical fiber infrastructure planning, project coordination, route feasibility, and telecommunication network rollout.',
+      'Hands-on involvement in optical fiber infrastructure planning, route feasibility analysis, and telecommunication network rollout.',
     points: [
       'Assisting in optical fiber rollout planning, site survey analysis, and project execution tracking.',
       'Coordinating field milestones, resource allocation, and telecommunications infrastructure reporting.',
@@ -314,7 +314,7 @@ export const experiences = [
     company: 'TechTitude Labs',
     period: '2024 — Present',
     summary:
-      'Co-founded TechTitude Labs to engineer innovative embedded systems, robotics platforms, IoT hardware, and custom software solutions.',
+      'Co-founded TechTitude Labs to innovate, prototype, and build production-grade embedded hardware, robotics systems, and enterprise software.',
     points: [
       'Leading R&D for autonomous robotics, IoT hardware prototypes, and embedded control systems.',
       'Directing end-to-end product architecture from schematic and firmware development to client deployment.',
@@ -368,7 +368,7 @@ export const interestAreas = [
 ]
 
 export const resumeLink = {
-  label: 'Download Resume',
+  label: 'Download Technical CV',
   href: '/resume/Mufassir_CV.pdf',
 }
 
@@ -376,21 +376,21 @@ export const contactLinks = [
   {
     label: 'Email',
     value: 'mufassirriswan@gmail.com',
-    note: 'Direct email for internships, roles, and engineering collaborations.',
+    note: 'Direct channel for engineering roles, technical discussions, and collaborative projects.',
     href: 'mailto:mufassirriswan@gmail.com',
     action: 'Send an email',
   },
   {
     label: 'LinkedIn',
     value: 'linkedin.com/in/mohamedmufassir',
-    note: 'Professional profile and career updates.',
+    note: 'Connect for professional networking, industry updates, and career milestones.',
     href: 'https://www.linkedin.com/in/mohamedmufassir',
     action: 'Open LinkedIn',
   },
   {
     label: 'GitHub',
     value: 'github.com/M-Mufassir',
-    note: 'Public repositories, firmware, and code samples.',
+    note: 'Explore open-source repositories, microcontroller firmware, and codebases.',
     href: 'https://github.com/M-Mufassir/',
     action: 'Open GitHub',
   },

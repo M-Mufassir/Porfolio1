@@ -42,10 +42,10 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
   return (
     <section className="section-block" id="projects">
       <div className="section-heading">
-        <span className="section-eyebrow">Projects</span>
-        <h2 className="section-title">Hardware, Firmware & Software Engineering</h2>
+        <span className="section-eyebrow">Selected Works</span>
+        <h2 className="section-title">Engineered Systems & Applied Innovation</h2>
         <p className="section-subtitle">
-          Featured engineering builds spanning AVR assembly robotics, closed-loop PID control systems, IoT surveillance, and cross-platform desktop products.
+          A curated showcase of autonomous robotics, precision closed-loop control systems, embedded IoT networks, and scalable software solutions.
         </p>
       </div>
 
@@ -112,7 +112,7 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
                   setSelectedProject(project)
                 }}
               >
-                <span>View Engineering Details</span>
+                <span>Explore Architecture</span>
                 <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                 </svg>
@@ -188,10 +188,13 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
                 </ul>
               </div>
 
-              {selectedProject.repoNote && (
+              {(selectedProject.systemHighlight || selectedProject.repoNote) && (
                 <div className="modal-note-box">
-                  <span className="note-icon" aria-hidden="true">ℹ</span>
-                  <p>{selectedProject.repoNote}</p>
+                  <span className="note-icon" aria-hidden="true">✦</span>
+                  <div className="modal-note-content">
+                    <span className="modal-note-title">Architecture Highlight</span>
+                    <p>{selectedProject.systemHighlight || selectedProject.repoNote}</p>
+                  </div>
                 </div>
               )}
             </div>
@@ -202,7 +205,7 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
                 type="button"
                 onClick={() => setSelectedProject(null)}
               >
-                Done
+                Close Details
               </button>
             </div>
           </div>

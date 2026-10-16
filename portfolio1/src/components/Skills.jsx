@@ -2,10 +2,10 @@ export function Skills({ skillSections, interestAreas }) {
   return (
     <section className="section-block" id="skills">
       <div className="section-heading">
-        <span className="section-eyebrow">Skills</span>
-        <h2 className="section-title">Technical Capabilities & Tooling</h2>
+        <span className="section-eyebrow">Technical Stack</span>
+        <h2 className="section-title">Specialized Disciplines & Engineering Toolkit</h2>
         <p className="section-subtitle">
-          Hands-on proficiency across bare-metal microcontrollers, real-time control algorithms, hardware interfaces, and full-stack software development.
+          A multidisciplinary technical foundation spanning bare-metal microcontrollers, closed-loop control dynamics, optical telecommunications, and full-stack software.
         </p>
       </div>
 
@@ -31,7 +31,7 @@ export function Skills({ skillSections, interestAreas }) {
       <article className="interests-panel">
         <div className="interests-header">
           <span className="card-pill">Primary Engineering Focus</span>
-          <span className="interests-caption">Core domains targeted for career impact</span>
+          <span className="interests-caption">Core research and industry focus domains</span>
         </div>
         <div className="chip-row">
           {interestAreas.map((area) => (

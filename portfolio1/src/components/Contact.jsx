@@ -12,10 +12,10 @@ export function Contact({ contactLinks }) {
   return (
     <section className="section-block" id="contact">
       <div className="section-heading">
-        <span className="section-eyebrow">Contact</span>
-        <h2 className="section-title">Let's Connect & Collaborate</h2>
+        <span className="section-eyebrow">Get In Touch</span>
+        <h2 className="section-title">Let's Build Something Exceptional Together</h2>
         <p className="section-subtitle">
-          Open to internships, graduate engineering roles, and hardware/software collaborations. Feel free to reach out via email or connect on professional platforms.
+          Open to engineering roles, embedded systems R&D, telecom infrastructure, and technical collaborations. Reach out directly or connect through professional networks.
         </p>
       </div>
 

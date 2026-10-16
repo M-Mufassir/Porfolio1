@@ -18,7 +18,7 @@ export function Footer({ brandProfile }) {
 
         <div className="footer-center">
           <p className="footer-copy">
-            © {currentYear} {brandProfile.name}. Built with React, Vite & Modern Web Standards.
+            © {currentYear} {brandProfile.name} — Designed & engineered with modern web standards.
           </p>
         </div>
 

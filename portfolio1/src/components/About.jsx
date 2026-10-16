@@ -2,10 +2,10 @@ export function About({ aboutHighlights, education }) {
   return (
     <section className="section-block" id="about">
       <div className="section-heading">
-        <span className="section-eyebrow">About</span>
-        <h2 className="section-title">Engineering Mindset & Systems Foundation</h2>
+        <span className="section-eyebrow">Engineering Philosophy</span>
+        <h2 className="section-title">Bridging Hardware Precision & Software Architecture</h2>
         <p className="section-subtitle">
-          Bridging low-level register manipulation, hardware integration, and software architecture to engineer reliable, real-world systems.
+          From bare-metal microcontroller registers and circuit design to cloud protocols and full-stack software, I build cohesive, reliable systems engineered for real-world impact.
         </p>
       </div>
 

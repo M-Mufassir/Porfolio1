@@ -9,10 +9,10 @@ export function Experience({ experiences, experience, freelanceExperience, resum
     <>
       <section className="section-block" id="experience">
         <div className="section-heading">
-          <span className="section-eyebrow">Experience & Leadership</span>
-          <h2 className="section-title">Industry, Entrepreneurship & Practical Execution</h2>
+          <span className="section-eyebrow">Career Milestones</span>
+          <h2 className="section-title">Professional Experience & Venture Leadership</h2>
           <p className="section-subtitle">
-            Applying engineering rigor to telecommunications infrastructure, startup venture leadership, production software, and client solutions.
+            Applying engineering rigor across optical telecommunications infrastructure, hardware startup leadership, cross-platform software engineering, and client deliverables.
           </p>
         </div>
 
@@ -62,10 +62,10 @@ export function Experience({ experiences, experience, freelanceExperience, resum
       <section className="section-block resume-section" id="resume">
         <div className="resume-banner-card">
           <div className="resume-banner-content">
-            <span className="section-eyebrow">Curriculum Vitae</span>
-            <h2 className="resume-banner-title">Engineering Resume & Credentials</h2>
+            <span className="section-eyebrow">Formal Credentials</span>
+            <h2 className="resume-banner-title">Comprehensive Technical Curriculum Vitae</h2>
             <p className="resume-banner-desc">
-              Looking for a comprehensive technical breakdown of my academic coursework, robotics hardware builds, telecommunications training, and software experience? Download the latest verified CV.
+              Download my detailed technical CV covering academic coursework at SLIIT, embedded hardware prototypes, fiber optic infrastructure coordination, and software development experience.
             </p>
           </div>
 
