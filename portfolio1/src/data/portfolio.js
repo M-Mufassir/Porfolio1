@@ -9,7 +9,7 @@ export const navigationItems = [
 
 export const brandProfile = {
   name: 'Mohamed Mufassir',
-  monogram: 'M',
+  monogram: 'MR',
   title: 'Computer Systems Engineering Undergraduate | Co-Founder @ TechTitude Labs',
   tagline: 'Embedded Systems, Autonomous Robotics & Telecommunication Infrastructure',
   summary:
