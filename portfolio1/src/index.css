@@ -1,110 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700&display=swap');
-@import './styles/tokens.css';
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* ==========================================================================
-   GLOBAL BASE & RESET
+   GLOBAL BASE LAYER (Layered cleanly below Tailwind utilities)
    ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    background-color: var(--bg-app);
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition-smooth), color var(--transition-smooth);
+  }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
-  -webkit-text-size-adjust: 100%;
-}
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
-  background-color: var(--bg-app);
-  overflow-x: hidden;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: background-color var(--transition-smooth), color var(--transition-smooth);
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+  button {
+    cursor: pointer;
+  }
 
-/* Typography Defaults */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-}
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+  }
 
-p {
-  color: var(--text-secondary);
-}
-
-a {
-  color: var(--accent-primary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--accent-primary-hover);
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-  color: inherit;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-code,
-kbd,
-samp,
-pre {
-  font-family: var(--font-mono);
-}
-
-/* Accessible Focus States */
-:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 3px;
-  border-radius: var(--radius-sm);
+  :focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 
 ::-webkit-scrollbar-track {
@@ -121,7 +84,7 @@ pre {
   background: var(--text-muted);
 }
 
-/* Reduced motion preference */
+/* Reduced motion accessibility guard */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

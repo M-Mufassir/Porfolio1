@@ -2,8 +2,8 @@ export const navigationItems = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Process', href: '#process' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Resume', href: '#resume' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -19,10 +19,127 @@ export const brandProfile = {
   availability: 'Open for Engineering Opportunities & Collaborations',
 }
 
+export const heroRoles = [
+  'EMBEDDED SYSTEMS',
+  'AUTONOMOUS ROBOTICS',
+  'OPTICAL TELECOM',
+  'FIRMWARE ARCHITECT',
+]
+
 export const heroMetrics = [
   { label: 'Specialization', value: 'Embedded & Autonomous Systems' },
   { label: 'Venture', value: 'Co-Founder @ TechTitude Labs' },
   { label: 'Academic Base', value: 'SLIIT (2023 — 2027)' },
+]
+
+export const telemetryStats = [
+  {
+    value: 11,
+    suffix: '+',
+    label: 'Engineered Systems',
+    detail: 'Robotics, Firmware & Full-Stack',
+    icon: 'cpu',
+  },
+  {
+    value: 4,
+    suffix: '',
+    label: 'Core Domains',
+    detail: 'Robotics, Embedded, Telecom, Software',
+    icon: 'layers',
+  },
+  {
+    value: 2024,
+    suffix: '+',
+    label: 'TechTitude Labs',
+    detail: 'Hardware R&D Venture Leadership',
+    icon: 'zap',
+  },
+  {
+    value: 2027,
+    prefix: "'",
+    shortValue: "SLIIT '27",
+    label: 'BSc (Hons) CSE',
+    detail: 'Computer Systems Engineering',
+    icon: 'graduation',
+  },
+]
+
+export const coreCapabilities = [
+  {
+    title: 'Bare-Metal & Firmware',
+    description:
+      'Register-level Embedded C & AVR Assembly with deterministic interrupts and sub-millisecond timing loops.',
+    icon: 'cpu',
+  },
+  {
+    title: 'Autonomous Robotics',
+    description:
+      'Sensor fusion, closed-loop PID motor speed control, and multi-state FSM navigation behaviors.',
+    icon: 'bot',
+  },
+  {
+    title: 'Optical & Telecom Ops',
+    description:
+      'Fiber rollout feasibility, link budget modeling, splicing coordination, and signal modulation analysis.',
+    icon: 'radio',
+  },
+  {
+    title: 'IoT & Edge Telemetry',
+    description:
+      'ESP32-CAM live MJPEG streaming, UART/I2C/SPI buses, and real-time Telegram & web control surfaces.',
+    icon: 'wifi',
+  },
+  {
+    title: 'PCB & Digital Logic',
+    description:
+      'Circuit prototyping, synchronous sequential FSM logic, shift registers, and oscilloscope validation.',
+    icon: 'circuit',
+  },
+  {
+    title: 'Full-Stack & Desktop',
+    description:
+      'Production React, TypeScript, Electron.js desktop POS systems, Spring Boot APIs, and PostgreSQL.',
+    icon: 'code',
+  },
+]
+
+export const engineeringProcess = [
+  {
+    step: '01',
+    title: 'System Architecture',
+    description: 'Define timing budgets, protocol topology, hardware BOM, and state transition requirements.',
+    icon: 'compass',
+  },
+  {
+    step: '02',
+    title: 'Schematic & Logic',
+    description: 'Design digital logic, sensor interfaces, PCB footprints, and communication buses.',
+    icon: 'circuit',
+  },
+  {
+    step: '03',
+    title: 'Firmware & Code',
+    description: 'Implement register-level AVR/ESP32 firmware, PID control loops, and full-stack software.',
+    icon: 'terminal',
+  },
+  {
+    step: '04',
+    title: 'Bench & HIL Test',
+    description: 'Verify RPM response curves, signal integrity, and edge cases on physical hardware.',
+    icon: 'activity',
+  },
+  {
+    step: '05',
+    title: 'Field Deployment',
+    description: 'Ship reliable hardware-software systems, fiber infrastructure rollouts, and client apps.',
+    icon: 'rocket',
+  },
+]
+
+export const featuredProjectTitles = [
+  'AVR - Assembly Autonomous Line-Following Car with Smart Parking',
+  'ESP32-CAM Remote-Controlled Car with Live Video Streaming',
+  'PID-Based DC Motor Speed Control System',
 ]
 
 export const aboutHighlights = [

@@ -1,3 +1,5 @@
+import { ArrowUp } from 'lucide-react'
+
 export function Footer({ brandProfile }) {
   const currentYear = new Date().getFullYear()
 
@@ -18,7 +20,7 @@ export function Footer({ brandProfile }) {
 
         <div className="footer-center">
           <p className="footer-copy">
-            © {currentYear} {brandProfile.name} — Designed & engineered with modern web standards.
+            © {currentYear} {brandProfile.name} — Engineered with React 19, Motion &amp; Tailwind CSS.
           </p>
         </div>
 
@@ -30,9 +32,7 @@ export function Footer({ brandProfile }) {
             type="button"
           >
             <span>Back to top</span>
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-              <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
+            <ArrowUp size={15} aria-hidden="true" />
           </button>
         </div>
       </div>

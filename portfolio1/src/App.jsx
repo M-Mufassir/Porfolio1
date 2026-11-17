@@ -1,43 +1,53 @@
 import { useEffect, useRef, useState } from 'react'
+import Lenis from 'lenis'
+import { Check } from 'lucide-react'
 import './App.css'
 import {
   aboutHighlights,
   brandProfile,
   contactLinks,
+  coreCapabilities,
   education,
+  engineeringProcess,
   experience,
   experiences,
+  featuredProjectTitles,
   freelanceExperience,
-  heroMetrics,
+  heroRoles,
   interestAreas,
   navigationItems,
   projectCards,
   resumeLink,
   skillSections,
+  telemetryStats,
 } from './data/portfolio.js'
 import {
+  About,
+  BackgroundCanvas,
+  CommandMenu,
+  Contact,
+  Experience,
+  Footer,
   Header,
   Hero,
-  About,
-  Skills,
+  ProcessTimeline,
   Projects,
-  Experience,
-  Contact,
-  Footer,
+  Skills,
+  StatsBar,
 } from './components'
 
 function App() {
   const [selectedProject, setSelectedProject] = useState(null)
+  const [commandOpen, setCommandOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
   const shellRef = useRef(null)
 
-  // Initialize theme from localStorage or system preference
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('portfolio-theme')
     if (saved === 'light' || saved === 'dark') return saved
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
   })
 
-  // Apply data-theme to root html element
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem('portfolio-theme', theme)
@@ -45,6 +55,12 @@ function App() {
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+  }
+
+  const handleCopyEmail = (email) => {
+    navigator.clipboard?.writeText(email)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 2600)
   }
 
   // Keyboard Escape listener for modal
@@ -58,51 +74,35 @@ function App() {
     return () => window.removeEventListener('keydown', handleEscape)
   }, [])
 
-  // Interactive subtle parallax and background motion
+  // Inertial smooth scroll via Lenis (disabled automatically for reduced-motion)
   useEffect(() => {
-    const shell = shellRef.current
-    if (!shell || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return undefined
     }
 
-    let animationFrame = 0
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    })
 
-    const updateParallax = (pointerX = 0, pointerY = 0) => {
-      window.cancelAnimationFrame(animationFrame)
-      animationFrame = window.requestAnimationFrame(() => {
-        const scrollDepth = Math.min(window.scrollY / 900, 1)
-        shell.style.setProperty('--parallax-x', pointerX.toFixed(3))
-        shell.style.setProperty('--parallax-y', pointerY.toFixed(3))
-        shell.style.setProperty('--parallax-scroll', scrollDepth.toFixed(3))
-      })
+    let rafId = 0
+    const raf = (time) => {
+      lenis.raf(time)
+      rafId = window.requestAnimationFrame(raf)
     }
-
-    const handlePointerMove = (event) => {
-      const pointerX = event.clientX / window.innerWidth - 0.5
-      const pointerY = event.clientY / window.innerHeight - 0.5
-      updateParallax(pointerX, pointerY)
-    }
-
-    const handleScroll = () => {
-      const currentX = Number(shell.style.getPropertyValue('--parallax-x')) || 0
-      const currentY = Number(shell.style.getPropertyValue('--parallax-y')) || 0
-      updateParallax(currentX, currentY)
-    }
-
-    updateParallax()
-    window.addEventListener('pointermove', handlePointerMove, { passive: true })
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    rafId = window.requestAnimationFrame(raf)
 
     return () => {
-      window.cancelAnimationFrame(animationFrame)
-      window.removeEventListener('pointermove', handlePointerMove)
-      window.removeEventListener('scroll', handleScroll)
+      window.cancelAnimationFrame(rafId)
+      lenis.destroy()
     }
   }, [])
 
   return (
     <div className="site-shell" ref={shellRef}>
-      {/* Dynamic Background Mesh & Grid Layers */}
+      {/* Interactive Telemetry Node Canvas + Ambient Mesh & Architectural Grid */}
+      <BackgroundCanvas theme={theme} />
       <div className="ambient-mesh-glow" aria-hidden="true" />
       <div className="ambient-grid-layer" aria-hidden="true" />
 
@@ -112,27 +112,70 @@ function App() {
         resumeLink={resumeLink}
         theme={theme}
         toggleTheme={toggleTheme}
+        onOpenCommand={() => setCommandOpen(true)}
       />
 
       <main className="page-shell" id="top">
-        <Hero brandProfile={brandProfile} heroMetrics={heroMetrics} resumeLink={resumeLink} />
+        <Hero
+          brandProfile={brandProfile}
+          heroRoles={heroRoles}
+          resumeLink={resumeLink}
+        />
+
+        <StatsBar telemetryStats={telemetryStats} />
+
         <About aboutHighlights={aboutHighlights} education={education} />
-        <Skills skillSections={skillSections} interestAreas={interestAreas} />
+
+        <Skills
+          coreCapabilities={coreCapabilities}
+          skillSections={skillSections}
+          interestAreas={interestAreas}
+        />
+
         <Projects
           projectCards={projectCards}
+          featuredProjectTitles={featuredProjectTitles}
           selectedProject={selectedProject}
           setSelectedProject={setSelectedProject}
         />
+
+        <ProcessTimeline engineeringProcess={engineeringProcess} />
+
         <Experience
           experiences={experiences}
           experience={experience}
           freelanceExperience={freelanceExperience}
           resumeLink={resumeLink}
         />
-        <Contact contactLinks={contactLinks} />
+
+        <Contact
+          contactLinks={contactLinks}
+          onCopyEmail={handleCopyEmail}
+          copied={copied}
+        />
       </main>
 
       <Footer brandProfile={brandProfile} />
+
+      <CommandMenu
+        open={commandOpen}
+        setOpen={setCommandOpen}
+        navigationItems={navigationItems}
+        projectCards={projectCards}
+        onSelectProject={setSelectedProject}
+        resumeLink={resumeLink}
+        contactLinks={contactLinks}
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onCopyEmail={handleCopyEmail}
+      />
+
+      {copied && (
+        <div className="toast-notification" role="status" aria-live="polite">
+          <Check size={16} aria-hidden="true" />
+          <span>Email copied to clipboard!</span>
+        </div>
+      )}
     </div>
   )
 }

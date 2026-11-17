@@ -1,16 +1,19 @@
+import { Download } from 'lucide-react'
+import { motion as Motion } from 'motion/react'
+import { SpotlightCard } from './SpotlightCard'
+import { ShinyText, SplitText } from './TextAnimations'
+
 export function Experience({ experiences, experience, freelanceExperience, resumeLink }) {
-  // Support both new `experiences` array and legacy props
-  const experienceList = experiences || [
-    experience,
-    freelanceExperience,
-  ].filter(Boolean)
+  const experienceList = experiences || [experience, freelanceExperience].filter(Boolean)
 
   return (
     <>
       <section className="section-block" id="experience">
         <div className="section-heading">
           <span className="section-eyebrow">Career Milestones</span>
-          <h2 className="section-title">Professional Experience & Venture Leadership</h2>
+          <h2 className="section-title">
+            <SplitText text="Professional Experience & Venture Leadership" mode="words" />
+          </h2>
           <p className="section-subtitle">
             Applying engineering rigor across optical telecommunications infrastructure, hardware startup leadership, cross-platform software engineering, and client deliverables.
           </p>
@@ -21,13 +24,20 @@ export function Experience({ experiences, experience, freelanceExperience, resum
             const isLast = index === experienceList.length - 1
 
             return (
-              <article key={`${item.role}-${item.period}`} className="timeline-item">
+              <Motion.article
+                key={`${item.role}-${item.period}`}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="timeline-item"
+              >
                 <div className="timeline-marker" aria-hidden="true">
                   <div className="timeline-dot" />
                   {!isLast && <div className="timeline-line" />}
                 </div>
 
-                <div className="timeline-card">
+                <SpotlightCard className="timeline-card">
                   <div className="timeline-card-header">
                     <div>
                       <div className="timeline-badge-row">
@@ -51,8 +61,8 @@ export function Experience({ experiences, experience, freelanceExperience, resum
                       ))}
                     </ul>
                   )}
-                </div>
-              </article>
+                </SpotlightCard>
+              </Motion.article>
             )
           })}
         </div>
@@ -60,24 +70,28 @@ export function Experience({ experiences, experience, freelanceExperience, resum
 
       {/* Resume Section Banner */}
       <section className="section-block resume-section" id="resume">
-        <div className="resume-banner-card">
-          <div className="resume-banner-content">
-            <span className="section-eyebrow">Formal Credentials</span>
-            <h2 className="resume-banner-title">Comprehensive Technical Curriculum Vitae</h2>
-            <p className="resume-banner-desc">
-              Download my detailed technical CV covering academic coursework at SLIIT, embedded hardware prototypes, fiber optic infrastructure coordination, and software development experience.
-            </p>
-          </div>
+        <SpotlightCard beam className="resume-banner-card">
+          <div className="resume-banner-grid">
+            <div className="resume-banner-content">
+              <span className="section-eyebrow">Formal Credentials</span>
+              <h2 className="resume-banner-title">Comprehensive Technical Curriculum Vitae</h2>
+              <p className="resume-banner-desc">
+                Download my detailed technical CV covering academic coursework at SLIIT, embedded hardware prototypes, fiber optic infrastructure coordination, and software development experience.
+              </p>
+            </div>
 
-          <div className="resume-banner-action">
-            <a className="button primary-btn resume-download-btn" href={resumeLink.href} download>
-              <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-              <span>{resumeLink.label}</span>
-            </a>
+            <div className="resume-banner-action">
+              <a
+                className="button metallic-cta-btn resume-download-btn"
+                href={resumeLink.href}
+                download
+              >
+                <Download size={18} aria-hidden="true" />
+                <ShinyText>{resumeLink.label}</ShinyText>
+              </a>
+            </div>
           </div>
-        </div>
+        </SpotlightCard>
       </section>
     </>
   )

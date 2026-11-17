@@ -1,47 +1,69 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export function ProjectImageSlider({ images, title }) {
   const slides = images?.length ? images : ['/images/projects/default.png']
   const hasMultipleSlides = slides.length > 1
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: hasMultipleSlides })
   const [activeSlide, setActiveSlide] = useState(0)
 
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setActiveSlide(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
+
   useEffect(() => {
-    if (!hasMultipleSlides) return undefined
+    if (!emblaApi) return undefined
+    emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
+    return () => {
+      emblaApi.off('select', onSelect)
+      emblaApi.off('reInit', onSelect)
+    }
+  }, [emblaApi, onSelect])
 
-    const slideTimer = window.setInterval(() => {
-      setActiveSlide((currentSlide) => (currentSlide + 1) % slides.length)
-    }, 4000)
-
-    return () => window.clearInterval(slideTimer)
-  }, [hasMultipleSlides, slides.length])
-
-  const goToSlide = (e, index) => {
-    e.stopPropagation()
-    setActiveSlide(index)
-  }
+  useEffect(() => {
+    if (!emblaApi || !hasMultipleSlides) return undefined
+    const timer = window.setInterval(() => {
+      emblaApi.scrollNext()
+    }, 4500)
+    return () => window.clearInterval(timer)
+  }, [emblaApi, hasMultipleSlides])
 
   const goToPrevious = (e) => {
     e.stopPropagation()
-    setActiveSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
+    emblaApi?.scrollPrev()
   }
 
   const goToNext = (e) => {
     e.stopPropagation()
-    setActiveSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
+    emblaApi?.scrollNext()
+  }
+
+  const goToSlide = (e, index) => {
+    e.stopPropagation()
+    emblaApi?.scrollTo(index)
   }
 
   return (
     <div className={`project-image-slider ${hasMultipleSlides ? 'has-slides' : 'single-slide'}`}>
-      <div className="slider-viewport">
-        <img
-          className="slider-image"
-          src={slides[activeSlide]}
-          alt={`${title} - visual ${activeSlide + 1} of ${slides.length}`}
-          loading="lazy"
-          onError={(e) => {
-            e.target.src = '/images/projects/default.png'
-          }}
-        />
+      <div className="slider-viewport overflow-hidden" ref={emblaRef}>
+        <div className="flex h-full">
+          {slides.map((src, index) => (
+            <div key={`${src}-${index}`} className="flex-[0_0_100%] min-w-0 h-full">
+              <img
+                className="slider-image"
+                src={src}
+                alt={`${title} - visual ${index + 1} of ${slides.length}`}
+                loading="lazy"
+                onError={(e) => {
+                  e.target.src = '/images/projects/default.png'
+                }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {hasMultipleSlides && (
@@ -53,9 +75,7 @@ export function ProjectImageSlider({ images, title }) {
               aria-label="Previous image"
               type="button"
             >
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
+              <ChevronLeft size={16} aria-hidden="true" />
             </button>
             <button
               className="slider-arrow next"
@@ -63,9 +83,7 @@ export function ProjectImageSlider({ images, title }) {
               aria-label="Next image"
               type="button"
             >
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-              </svg>
+              <ChevronRight size={16} aria-hidden="true" />
             </button>
           </div>
 
