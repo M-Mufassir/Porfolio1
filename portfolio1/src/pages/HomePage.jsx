@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion as Motion } from 'motion/react'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Hero, PageSEO, WorkTogether } from '../components'
@@ -11,11 +11,9 @@ export function HomePage({
   projectCards,
   freelanceTracks,
   contactLinks,
-  onOpenProject,
   onCopyContact,
   copiedValue,
 }) {
-  const navigate = useNavigate()
   const spotlightSystems = projectCards.slice(0, 3)
 
   return (
@@ -39,7 +37,7 @@ export function HomePage({
         resumeLink={resumeLink}
       />
 
-      {/* Selected Engineering Highlights */}
+      {/* Selected Engineering Highlights — Real indexable links into dedicated project pages */}
       <section className="section-open home-preview-section">
         <div className="home-preview-header">
           <div>
@@ -54,13 +52,9 @@ export function HomePage({
 
         <div className="home-highlights-ledger">
           {spotlightSystems.map((project, idx) => (
-            <button
-              key={project.title}
-              type="button"
-              onClick={() => {
-                onOpenProject(project)
-                navigate('/projects')
-              }}
+            <Link
+              key={project.slug}
+              to={`/projects/${project.slug}`}
               className="project-index-row home-highlight-row"
             >
               <span className="index-num">{String(idx + 1).padStart(2, '0')}</span>
@@ -76,35 +70,35 @@ export function HomePage({
               <span className="index-arrow-circle" aria-hidden="true">
                 <ArrowUpRight size={17} />
               </span>
-            </button>
+            </Link>
           ))}
         </div>
 
         {/* Clean Multi-Page Route Strip */}
         <div className="home-route-strip">
-          <Link to="/about" className="home-route-link">
+          <Link to="/robotics" className="home-route-link">
             <span className="route-num">01</span>
             <div>
-              <strong>Engineering Philosophy &amp; Stack</strong>
-              <small>Bare-metal firmware, PID robotics &amp; workflow</small>
+              <strong>Robotics &amp; Embedded Learnings</strong>
+              <small>PID motor control, AVR assembly &amp; ESP32 notes</small>
+            </div>
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </Link>
+
+          <Link to="/freelance" className="home-route-link">
+            <span className="route-num">02</span>
+            <div>
+              <strong>Freelance Engineering Services</strong>
+              <small>Software, IoT, Embedded &amp; Robotics builds</small>
             </div>
             <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
 
           <Link to="/experience" className="home-route-link">
-            <span className="route-num">02</span>
+            <span className="route-num">03</span>
             <div>
               <strong>Career &amp; TechTitude Labs</strong>
               <small>Telecom fiber, hardware R&amp;D &amp; CV</small>
-            </div>
-            <ArrowUpRight size={16} aria-hidden="true" />
-          </Link>
-
-          <Link to="/contact" className="home-route-link">
-            <span className="route-num">03</span>
-            <div>
-              <strong>Start a Collaboration</strong>
-              <small>Direct channels &amp; project brief</small>
             </div>
             <ArrowUpRight size={16} aria-hidden="true" />
           </Link>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { AnimatePresence } from 'motion/react'
 import Lenis from 'lenis'
 import { Check } from 'lucide-react'
@@ -13,6 +13,7 @@ import {
   experience,
   experiences,
   freelanceExperience,
+  freelanceFaqs,
   freelanceTracks,
   heroRoles,
   inlineMetrics,
@@ -21,6 +22,7 @@ import {
   navigationItems,
   projectCards,
   resumeLink,
+  roboticsLearnings,
   skillSections,
   techRibbonItems,
 } from './data/portfolio.js'
@@ -35,9 +37,18 @@ import {
   AboutPage,
   ContactPage,
   ExperiencePage,
+  FreelancePage,
   HomePage,
+  ProjectDetailPage,
   ProjectsPage,
+  RoboticsPage,
 } from './pages'
+
+function LegacyProjectRedirect() {
+  const { slug } = useParams()
+  const normalized = slug === 'pid' ? 'pid-motor-control' : slug
+  return <Navigate to={normalized ? `/projects/${normalized}` : '/projects'} replace />
+}
 
 function App() {
   const [selectedProject, setSelectedProject] = useState(null)
@@ -178,6 +189,34 @@ function App() {
                   projectCards={projectCards}
                   selectedProject={selectedProject}
                   setSelectedProject={setSelectedProject}
+                />
+              }
+            />
+            <Route
+              path="/projects/:slug"
+              element={<ProjectDetailPage projectCards={projectCards} />}
+            />
+            <Route path="/project/pid" element={<Navigate to="/projects/pid-motor-control" replace />} />
+            <Route path="/project/:slug" element={<LegacyProjectRedirect />} />
+            <Route
+              path="/robotics"
+              element={
+                <RoboticsPage
+                  roboticsLearnings={roboticsLearnings}
+                  projectCards={projectCards}
+                />
+              }
+            />
+            <Route
+              path="/freelance"
+              element={
+                <FreelancePage
+                  freelanceTracks={freelanceTracks}
+                  freelanceFaqs={freelanceFaqs}
+                  contactLinks={contactLinks}
+                  projectCards={projectCards}
+                  onCopyContact={handleCopyContact}
+                  copiedValue={copiedInfo?.value}
                 />
               }
             />

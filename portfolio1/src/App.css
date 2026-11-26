@@ -239,7 +239,7 @@
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 1.85rem;
+  gap: 1.35rem;
 }
 
 .nav-link {
@@ -2539,6 +2539,278 @@
 
 .back-to-top-btn:hover { color: var(--accent-primary); }
 
+/* ==========================================================================
+   PROJECT DETAIL CASE STUDY, ROBOTICS LEARNINGS & FREELANCE PAGES
+   ========================================================================== */
+.wt-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.detail-breadcrumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  transition: color var(--transition-fast);
+}
+
+.detail-breadcrumb-link:hover {
+  color: var(--accent-primary);
+}
+
+.detail-page-title {
+  max-width: 24ch;
+}
+
+.detail-lead-copy {
+  margin-top: 0.45rem;
+  max-width: 68ch;
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: var(--text-secondary);
+}
+
+.project-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.detail-media-stage {
+  width: 100%;
+  height: clamp(260px, 44vw, 480px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+
+.detail-media-stage .slider-root,
+.detail-media-stage .slider-viewport,
+.detail-media-stage .slider-track,
+.detail-media-stage .slider-slide {
+  height: 100%;
+}
+
+.detail-content-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.detail-prose-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.detail-prose-block h2 {
+  font-family: var(--font-display);
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.detail-prose-block p {
+  font-size: 0.98rem;
+  line-height: 1.78;
+  color: var(--text-secondary);
+}
+
+.detail-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-left: 2rem;
+  border-left: 1px solid var(--hairline);
+}
+
+.detail-spec-group h3 {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.detail-cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-related-section {
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detail-related-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.8vw, 2.15rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 0.35rem;
+}
+
+.detail-related-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.learnings-ledger {
+  display: flex;
+  flex-direction: column;
+}
+
+.learning-entry {
+  padding: 2.25rem 0;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.learning-entry:first-child {
+  border-top: 1px solid var(--hairline);
+}
+
+.learning-entry-head {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.learning-focus-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--accent-primary);
+  margin-bottom: 0.3rem;
+}
+
+.learning-entry-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.28rem, 2.4vw, 1.72rem);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.learning-summary {
+  max-width: 72ch;
+  font-size: 0.98rem;
+  line-height: 1.72;
+  color: var(--text-secondary);
+}
+
+.learning-project-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.learning-links-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.learning-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.detail-chip-link {
+  padding: 0.5rem 0.95rem;
+  font-size: 0.82rem;
+}
+
+.topic-bottom-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.freelance-faq-block {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.faq-ledger {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-row {
+  padding: 1.45rem 0;
+  border-bottom: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.faq-row:first-child {
+  border-top: 1px solid var(--hairline);
+}
+
+.faq-row h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+.faq-row p {
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.preview-actions-row,
+.modal-footer-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.row-case-study-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.row-case-study-link:hover {
+  text-decoration: underline;
+}
+
 /* --------------------------------------------------------------------------
    RESPONSIVE BREAKPOINTS
    -------------------------------------------------------------------------- */
@@ -2547,9 +2819,22 @@
   .about-open-grid,
   .project-split-stage,
   .contact-split-layout,
-  .work-together-grid {
+  .work-together-grid,
+  .detail-content-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+
+  .detail-sidebar-col {
+    padding-left: 0;
+    padding-top: 2rem;
+    border-left: none;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .faq-row {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
   }
 
   .hero-visual-col {

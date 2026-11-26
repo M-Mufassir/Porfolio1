@@ -77,6 +77,10 @@ export function WorkTogether({ freelanceTracks, contactLinks, onCopyContact, cop
               <span>Start a Project Inquiry</span>
               <ArrowUpRight size={17} aria-hidden="true" />
             </Link>
+            <Link to="/freelance" className="btn-outline-clean">
+              <span>Freelance Scope &amp; FAQ</span>
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
           </div>
         </Motion.div>
 

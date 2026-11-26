@@ -1,5 +1,8 @@
 export { HomePage } from './HomePage'
 export { AboutPage } from './AboutPage'
 export { ProjectsPage } from './ProjectsPage'
+export { ProjectDetailPage } from './ProjectDetailPage'
+export { RoboticsPage } from './RoboticsPage'
+export { FreelancePage } from './FreelancePage'
 export { ExperiencePage } from './ExperiencePage'
 export { ContactPage } from './ContactPage'

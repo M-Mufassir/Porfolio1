@@ -1,5 +1,24 @@
 {
+  "redirects": [
+    {
+      "source": "/project/pid",
+      "destination": "/projects/pid-motor-control",
+      "permanent": true
+    },
+    {
+      "source": "/project/:slug",
+      "destination": "/projects/:slug",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    { "source": "/about", "destination": "/_pages/about.html" },
+    { "source": "/projects", "destination": "/_pages/projects.html" },
+    { "source": "/robotics", "destination": "/_pages/robotics.html" },
+    { "source": "/freelance", "destination": "/_pages/freelance.html" },
+    { "source": "/experience", "destination": "/_pages/experience.html" },
+    { "source": "/contact", "destination": "/_pages/contact.html" },
+    { "source": "/projects/:slug", "destination": "/_pages/projects/:slug.html" },
     {
       "source": "/(.*)",
       "destination": "/index.html"

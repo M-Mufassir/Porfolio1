@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AnimatePresence, motion as Motion } from 'motion/react'
 import { ArrowUpRight, Sparkles, X } from 'lucide-react'
 import { ProjectImageSlider } from './ProjectImageSlider'
@@ -175,6 +176,14 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
                   <div className="index-stack-inline">
                     {project.stack.slice(0, 4).join('  /  ')}
                   </div>
+                  <Link
+                    to={`/projects/${project.slug}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="row-case-study-link"
+                  >
+                    <span>View Dedicated Case Study</span>
+                    <ArrowUpRight size={13} aria-hidden="true" />
+                  </Link>
                 </div>
 
                 <span className="index-arrow-circle" aria-hidden="true">
@@ -207,14 +216,23 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
                 {activePreview.systemHighlight}
               </div>
 
-              <button
-                type="button"
-                onClick={() => setSelectedProject(activePreview)}
-                className="preview-open-link"
-              >
-                <span>Open Full Architecture &amp; Deliverables</span>
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </button>
+              <div className="preview-actions-row">
+                <Link
+                  to={`/projects/${activePreview.slug}`}
+                  className="btn-dual-gradient"
+                >
+                  <span>Full Case Study</span>
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setSelectedProject(activePreview)}
+                  className="preview-open-link"
+                >
+                  <span>Quick Preview</span>
+                  <ArrowUpRight size={15} aria-hidden="true" />
+                </button>
+              </div>
             </div>
           </aside>
         )}
@@ -311,6 +329,19 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
                       <span className="modal-note-title">Architecture Highlight</span>
                       <p>{selectedProject.systemHighlight || selectedProject.repoNote}</p>
                     </div>
+                  </div>
+                )}
+
+                {selectedProject.slug && (
+                  <div className="modal-footer-cta">
+                    <Link
+                      to={`/projects/${selectedProject.slug}`}
+                      onClick={() => setSelectedProject(null)}
+                      className="btn-dual-gradient"
+                    >
+                      <span>Open Full Case Study Page</span>
+                      <ArrowUpRight size={16} aria-hidden="true" />
+                    </Link>
                   </div>
                 )}
               </div>

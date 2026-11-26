@@ -86,6 +86,7 @@ export function CommandMenu({
                 {item.label === 'Home' && <Home size={15} />}
                 {item.label === 'About' && <User size={15} />}
                 {item.label === 'Projects' && <FolderGit2 size={15} />}
+                {(item.label === 'Robotics' || item.label === 'Freelance') && <Cpu size={15} />}
                 {item.label === 'Experience' && <Briefcase size={15} />}
                 {item.label === 'Contact' && <Mail size={15} />}
                 <span>Open {item.label} Page</span>
@@ -96,12 +97,12 @@ export function CommandMenu({
           <Command.Group heading="Engineered Systems" className="cmdk-group">
             {projectCards.map((project) => (
               <Command.Item
-                key={project.title}
+                key={project.slug}
                 value={`${project.title} ${project.domainLabel} ${project.stack.join(' ')}`}
                 onSelect={() => {
                   setOpen(false)
-                  navigate('/projects')
-                  onSelectProject(project)
+                  onSelectProject?.(null)
+                  navigate(`/projects/${project.slug}`)
                 }}
                 className="cmdk-item"
               >
