@@ -1,113 +1,154 @@
-import { ArrowUpRight, Check, Copy, Mail, Sparkles } from 'lucide-react'
+import { useState } from 'react'
 import { motion as Motion } from 'motion/react'
-import { SpotlightCard } from './SpotlightCard'
+import { ArrowUpRight, Check, Copy, MapPin, Send } from 'lucide-react'
 import { SplitText } from './TextAnimations'
 
-export function Contact({ contactLinks, onCopyEmail, copied }) {
+export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail, copied }) {
   const emailContact = contactLinks.find((c) => c.label.toLowerCase() === 'email')
+  const [name, setName] = useState('')
+  const [senderEmail, setSenderEmail] = useState('')
+  const [selectedTopic, setSelectedTopic] = useState(inquiryTopics[0] || 'Embedded / Firmware')
+  const [message, setMessage] = useState('')
+
+  const handleInquirySubmit = (e) => {
+    e.preventDefault()
+    if (!emailContact) return
+    const subject = encodeURIComponent(`[Portfolio Inquiry] ${selectedTopic} — ${name || 'Collaboration'}`)
+    const body = encodeURIComponent(
+      `Hi Mufassir,\n\nName: ${name || 'Not provided'}\nEmail: ${senderEmail || 'Not provided'}\nArea: ${selectedTopic}\n\n${message || 'Interested in discussing an engineering collaboration.'}`
+    )
+    window.location.href = `mailto:${emailContact.value}?subject=${subject}&body=${body}`
+  }
 
   return (
-    <section className="section-block" id="contact">
-      <div className="section-heading">
-        <span className="section-eyebrow">Get In Touch</span>
-        <h2 className="section-title">
-          <SplitText text="Let's Build Something Exceptional Together" mode="words" />
-        </h2>
-        <p className="section-subtitle">
-          Open to engineering roles, embedded systems R&amp;D, telecom infrastructure, and technical collaborations. Reach out directly or connect through professional networks.
-        </p>
-      </div>
-
-      {/* Ref 3 Metallic Sheen CTA Banner */}
-      <Motion.div
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.5 }}
-        className="metallic-cta-banner"
-      >
-        <div className="metallic-banner-shine" aria-hidden="true" />
-        <div className="metallic-banner-left">
-          <span className="metallic-kicker">
-            <Sparkles size={13} aria-hidden="true" />
-            AVAILABLE FOR COLLABORATION
-          </span>
-          <h3 className="metallic-banner-headline">
-            LET&apos;S ENGINEER SOMETHING EXTRAORDINARY
-          </h3>
-        </div>
-
-        <div className="metallic-banner-right">
-          <p>
-            From bare-metal prototypes and autonomous vehicles to optical networks and modern web software.
+    <section className="section-open" id="contact">
+      <div className="contact-split-layout">
+        {/* Left Side: Open Editorial Call + Direct Channel Links (Zero Cards!) */}
+        <Motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.48 }}
+          className="contact-left-col"
+        >
+          <span className="section-eyebrow">Get In Touch</span>
+          <h2 className="contact-big-title">
+            <SplitText text="Let's engineer something extraordinary." mode="words" />
+          </h2>
+          <p className="contact-lead-copy">
+            Open for embedded firmware R&amp;D, autonomous robotics, optical telecom projects, and software engineering collaborations.
           </p>
-          <div className="metallic-banner-actions">
-            {emailContact && (
-              <a className="button metallic-cta-btn" href={emailContact.href}>
-                <Mail size={16} aria-hidden="true" />
-                <span>Start a Conversation</span>
-                <ArrowUpRight size={15} aria-hidden="true" />
-              </a>
-            )}
-            {emailContact && (
-              <button
-                type="button"
-                className="button ghost-btn"
-                onClick={() => onCopyEmail(emailContact.value)}
-              >
-                {copied ? <Check size={15} /> : <Copy size={15} />}
-                <span>{copied ? 'Email Copied' : 'Copy Email'}</span>
-              </button>
-            )}
-          </div>
-        </div>
-      </Motion.div>
 
-      <div className="contact-grid">
-        {contactLinks.map((contact, idx) => {
-          const isExternal = /^https?:/i.test(contact.href)
-          const isEmail = contact.label.toLowerCase() === 'email'
-
-          return (
-            <Motion.div
-              key={contact.label}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.4, delay: idx * 0.08 }}
-            >
-              <SpotlightCard as="article" className="contact-card">
-                <div className="contact-card-header">
-                  <span className="card-pill">{contact.label}</span>
-                  {isEmail && (
-                    <button
-                      className="copy-chip-btn"
-                      onClick={() => onCopyEmail(contact.value)}
-                      type="button"
-                      title="Copy email address"
+          <div className="contact-direct-list">
+            {contactLinks.map((item) => {
+              const isExternal = /^https?:/i.test(item.href)
+              const isEmail = item.label.toLowerCase() === 'email'
+              return (
+                <div key={item.label} className="contact-direct-row">
+                  <span className="contact-direct-label">{item.label}</span>
+                  <div className="contact-direct-actions">
+                    <a
+                      href={item.href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noreferrer noopener' : undefined}
+                      className="contact-direct-link"
                     >
-                      {copied ? <Check size={13} /> : <Copy size={13} />}
-                      <span>{copied ? 'Copied!' : 'Copy'}</span>
-                    </button>
-                  )}
+                      <span>{item.value}</span>
+                      <ArrowUpRight size={15} aria-hidden="true" />
+                    </a>
+                    {isEmail && (
+                      <button
+                        type="button"
+                        onClick={() => onCopyEmail(item.value)}
+                        className="contact-copy-inline"
+                        aria-label="Copy email address"
+                      >
+                        {copied ? <Check size={14} /> : <Copy size={14} />}
+                        <span>{copied ? 'Copied' : 'Copy'}</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
+              )
+            })}
 
-                <h3 className="contact-value">{contact.value}</h3>
-                <p className="contact-note">{contact.note}</p>
+            <div className="contact-direct-row">
+              <span className="contact-direct-label">Base</span>
+              <span className="contact-base-loc">
+                <MapPin size={14} aria-hidden="true" />
+                {brandProfile.location}
+              </span>
+            </div>
+          </div>
+        </Motion.div>
 
-                <a
-                  className="contact-action-link"
-                  href={contact.href}
-                  target={isExternal ? '_blank' : undefined}
-                  rel={isExternal ? 'noreferrer noopener' : undefined}
-                >
-                  <span>{contact.action}</span>
-                  <ArrowUpRight size={15} aria-hidden="true" />
-                </a>
-              </SpotlightCard>
-            </Motion.div>
-          )
-        })}
+        {/* Right Side: Unboxed Underline-Input Inquiry Form (Ref 1 Kawsar style!) */}
+        <Motion.form
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.48, delay: 0.08 }}
+          onSubmit={handleInquirySubmit}
+          className="contact-underline-form"
+        >
+          <div className="form-row-two">
+            <label className="underline-field">
+              <span>Full Name</span>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+              />
+            </label>
+
+            <label className="underline-field">
+              <span>Your Email</span>
+              <input
+                type="email"
+                value={senderEmail}
+                onChange={(e) => setSenderEmail(e.target.value)}
+                placeholder="you@company.com"
+              />
+            </label>
+          </div>
+
+          <div className="topic-selector-block">
+            <span className="topic-label">Interested in</span>
+            <div className="topic-chips-wrap">
+              {inquiryTopics.map((topic) => {
+                const active = selectedTopic === topic
+                return (
+                  <button
+                    key={topic}
+                    type="button"
+                    onClick={() => setSelectedTopic(topic)}
+                    className={`topic-chip ${active ? 'is-active' : ''}`}
+                  >
+                    {topic}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          <label className="underline-field">
+            <span>Project or Role Brief</span>
+            <textarea
+              rows={3}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Tell me about the system, hardware stack, or timeline..."
+            />
+          </label>
+
+          <div className="form-submit-row">
+            <button type="submit" className="btn-solid-primary">
+              <Send size={15} aria-hidden="true" />
+              <span>Send Inquiry</span>
+            </button>
+          </div>
+        </Motion.form>
       </div>
     </section>
   )

@@ -1,25 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion as Motion } from 'motion/react'
-import { ArrowUpRight, ChevronRight, Sparkles, X } from 'lucide-react'
+import { ArrowUpRight, Sparkles, X } from 'lucide-react'
 import { ProjectImageSlider } from './ProjectImageSlider'
-import { SpotlightCard } from './SpotlightCard'
 import { SplitText } from './TextAnimations'
 
 const FILTER_CATEGORIES = [
   { key: 'all', label: 'All Systems' },
   { key: 'robotics', label: 'Robotics & IoT' },
-  { key: 'embedded', label: 'Embedded Systems' },
+  { key: 'embedded', label: 'Embedded' },
   { key: 'systems', label: 'Digital & Telecom' },
-  { key: 'software', label: 'Software Engineering' },
+  { key: 'software', label: 'Software' },
 ]
 
-export function Projects({
-  projectCards,
-  featuredProjectTitles = [],
-  selectedProject,
-  setSelectedProject,
-}) {
+export function Projects({ projectCards, selectedProject, setSelectedProject }) {
   const [activeFilter, setActiveFilter] = useState('all')
+  const [previewProject, setPreviewProject] = useState(projectCards[0] || null)
 
   useEffect(() => {
     document.body.style.overflow = selectedProject ? 'hidden' : ''
@@ -27,13 +22,6 @@ export function Projects({
       document.body.style.overflow = ''
     }
   }, [selectedProject])
-
-  const featuredProjects = useMemo(() => {
-    if (!featuredProjectTitles.length) return projectCards.slice(0, 3)
-    return featuredProjectTitles
-      .map((title) => projectCards.find((p) => p.title === title))
-      .filter(Boolean)
-  }, [projectCards, featuredProjectTitles])
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === 'all') return projectCards
@@ -48,175 +36,191 @@ export function Projects({
     return map
   }, [projectCards])
 
+  // Split projects across two opposing visual marquee rows (Ref 1 Kawsar style!)
+  const marqueeRowA = useMemo(() => projectCards.slice(0, 6), [projectCards])
+  const marqueeRowB = useMemo(() => projectCards.slice(5), [projectCards])
+
+  const activePreview = useMemo(() => {
+    if (previewProject && filteredProjects.some((p) => p.title === previewProject.title)) {
+      return previewProject
+    }
+    return filteredProjects[0] || projectCards[0]
+  }, [filteredProjects, previewProject, projectCards])
+
   return (
-    <section className="section-block" id="projects">
+    <section className="section-open" id="projects">
       <div className="section-heading">
         <span className="section-eyebrow">Selected Works</span>
         <h2 className="section-title">
           <SplitText text="Engineered Systems & Applied Innovation" mode="words" />
         </h2>
         <p className="section-subtitle">
-          A curated showcase of autonomous robotics, precision closed-loop control systems, embedded IoT networks, and scalable software solutions.
+          Hover any strip preview or explore the interactive architecture index below to inspect schematics, deliverables, and control stacks.
         </p>
       </div>
 
-      {/* Ref 3 Flagship Featured Row (Top 3 Bento Cards w/ BorderBeam & Corner Arrow) */}
-      <div className="featured-block">
-        <div className="featured-block-header">
-          <span className="card-pill">
-            <Sparkles size={12} className="mr-1.5" aria-hidden="true" />
-            Featured Hardware &amp; Robotics
-          </span>
-          <span className="featured-caption">Flagship engineering case studies</span>
+      {/* Full-Bleed Dual-Row Opposing Visual Marquee (Ref 1 Kawsar Ahmed style — Zero Heavy Cards) */}
+      <div className="project-marquee-shell" aria-label="Visual project showcase strip">
+        <div className="marquee-track marquee-left">
+          {[...marqueeRowA, ...marqueeRowA].map((project, idx) => (
+            <button
+              key={`rowA-${project.title}-${idx}`}
+              type="button"
+              onClick={() => setSelectedProject(project)}
+              className="marquee-visual-item"
+              aria-label={`Inspect ${project.title}`}
+            >
+              <img
+                src={project.images?.[0] || '/images/projects/default.png'}
+                alt={project.title}
+                loading="lazy"
+                onError={(e) => {
+                  e.target.src = '/images/projects/default.png'
+                }}
+              />
+              <span className="marquee-item-caption">
+                <span>{project.domainLabel}</span>
+                <strong>{project.type}</strong>
+              </span>
+            </button>
+          ))}
         </div>
 
-        <div className="featured-bento-grid">
-          {featuredProjects.map((project, index) => (
-            <Motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
+        <div className="marquee-track marquee-right">
+          {[...marqueeRowB, ...marqueeRowB].map((project, idx) => (
+            <button
+              key={`rowB-${project.title}-${idx}`}
+              type="button"
+              onClick={() => setSelectedProject(project)}
+              className="marquee-visual-item"
+              aria-label={`Inspect ${project.title}`}
             >
-              <SpotlightCard
-                as="article"
-                beam
-                className="featured-project-card"
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="featured-card-media">
-                  <img
-                    src={project.images?.[0] || '/images/projects/default.png'}
-                    alt={project.title}
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.src = '/images/projects/default.png'
-                    }}
-                  />
-                  <span className="project-domain-tag">{project.domainLabel}</span>
-                </div>
-
-                <div className="featured-card-body">
-                  <span className="project-type-label">{project.type}</span>
-                  <h3 className="featured-card-title">{project.title}</h3>
-                  <div className="featured-card-footer">
-                    <span className="featured-stack-hint">
-                      {project.stack.slice(0, 2).join(' • ')}
-                    </span>
-                    <button
-                      type="button"
-                      className="corner-launch-btn"
-                      aria-label={`Open ${project.title}`}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setSelectedProject(project)
-                      }}
-                    >
-                      <ArrowUpRight size={17} />
-                    </button>
-                  </div>
-                </div>
-              </SpotlightCard>
-            </Motion.div>
+              <img
+                src={project.images?.[0] || '/images/projects/default.png'}
+                alt={project.title}
+                loading="lazy"
+                onError={(e) => {
+                  e.target.src = '/images/projects/default.png'
+                }}
+              />
+              <span className="marquee-item-caption">
+                <span>{project.domainLabel}</span>
+                <strong>{project.type}</strong>
+              </span>
+            </button>
           ))}
         </div>
       </div>
 
-      {/* Category Filter Pills with Motion Shared Pill Indicator */}
-      <div className="archive-header-bar">
-        <h3 className="archive-title">Complete Engineering Archive</h3>
-        <div
-          className="project-filter-bar"
-          role="tablist"
-          aria-label="Filter projects by engineering domain"
-        >
-          {FILTER_CATEGORIES.map((cat) => {
-            const count = counts[cat.key] || 0
-            const isActive = activeFilter === cat.key
+      {/* Underline Filter Tabs (Zero Boxy Pills!) */}
+      <div className="underline-filter-bar" role="tablist" aria-label="Filter projects by domain">
+        {FILTER_CATEGORIES.map((cat) => {
+          const count = counts[cat.key] || 0
+          const isActive = activeFilter === cat.key
+          return (
+            <button
+              key={cat.key}
+              role="tab"
+              type="button"
+              aria-selected={isActive}
+              onClick={() => setActiveFilter(cat.key)}
+              className={`underline-tab-btn ${isActive ? 'is-active' : ''}`}
+            >
+              <span>{cat.label}</span>
+              <span className="tab-count">{count}</span>
+              {isActive && (
+                <Motion.span
+                  layoutId="project-tab-line"
+                  className="tab-active-underline"
+                  transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                />
+              )}
+            </button>
+          )
+        })}
+      </div>
 
+      {/* Unboxed Split Interactive Index + Borderless Live Preview Panel */}
+      <div className="project-split-stage">
+        <div className="project-index-list">
+          {filteredProjects.map((project, idx) => {
+            const isHighlighted = activePreview?.title === project.title
             return (
-              <button
-                key={cat.key}
-                role="tab"
-                type="button"
-                aria-selected={isActive}
-                className={`filter-pill ${isActive ? 'is-active' : ''}`}
-                onClick={() => setActiveFilter(cat.key)}
+              <div
+                key={project.title}
+                role="button"
+                tabIndex={0}
+                onMouseEnter={() => setPreviewProject(project)}
+                onFocus={() => setPreviewProject(project)}
+                onClick={() => setSelectedProject(project)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setSelectedProject(project)
+                  }
+                }}
+                className={`project-index-row ${isHighlighted ? 'is-active' : ''}`}
               >
-                {isActive && (
-                  <Motion.span
-                    layoutId="project-filter-active"
-                    className="filter-active-bg"
-                    transition={{ type: 'spring', stiffness: 420, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{cat.label}</span>
-                <span className="filter-count relative z-10">{count}</span>
-              </button>
+                <span className="index-num">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+
+                <div className="index-main">
+                  <div className="index-meta">
+                    <span>{project.domainLabel}</span>
+                    <span>•</span>
+                    <span>{project.type}</span>
+                  </div>
+                  <h3 className="index-title">{project.title}</h3>
+                  <div className="index-stack-inline">
+                    {project.stack.slice(0, 4).join('  /  ')}
+                  </div>
+                </div>
+
+                <span className="index-arrow-circle" aria-hidden="true">
+                  <ArrowUpRight size={17} />
+                </span>
+              </div>
             )
           })}
         </div>
+
+        {/* Sticky Borderless Preview Column (Desktop) */}
+        {activePreview && (
+          <aside className="project-preview-stage" aria-label="Active project preview">
+            <div className="preview-media-frame">
+              <ProjectImageSlider
+                key={activePreview.title}
+                images={activePreview.images}
+                title={activePreview.title}
+              />
+            </div>
+
+            <div className="preview-copy">
+              <span className="preview-kicker">
+                {activePreview.domainLabel} — {activePreview.type}
+              </span>
+              <h4>{activePreview.title}</h4>
+              <p>{activePreview.summary}</p>
+
+              <div className="preview-highlights">
+                {activePreview.systemHighlight}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedProject(activePreview)}
+                className="preview-open-link"
+              >
+                <span>Open Full Architecture &amp; Deliverables</span>
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </button>
+            </div>
+          </aside>
+        )}
       </div>
 
-      {/* Project Cards Grid */}
-      <Motion.div layout className="project-grid">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project) => (
-            <Motion.div
-              key={`${project.title}-${project.type}`}
-              layout
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
-            >
-              <SpotlightCard
-                as="article"
-                className={`project-card ${selectedProject?.title === project.title ? 'is-selected' : ''}`}
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="project-card-media">
-                  <ProjectImageSlider images={project.images} title={project.title} />
-                  <span className="project-domain-tag">{project.domainLabel}</span>
-                </div>
-
-                <div className="project-card-content">
-                  <span className="project-type-label">{project.type}</span>
-                  <h3 className="project-card-title">{project.title}</h3>
-                  <p className="project-card-summary">{project.summary}</p>
-
-                  <div className="project-stack-row">
-                    {project.stack.slice(0, 4).map((tech) => (
-                      <span key={tech} className="tech-chip">
-                        {tech}
-                      </span>
-                    ))}
-                    {project.stack.length > 4 && (
-                      <span className="tech-chip more-chip">+{project.stack.length - 4}</span>
-                    )}
-                  </div>
-
-                  <button
-                    className="view-project-btn"
-                    type="button"
-                    aria-label={`View architecture and details for ${project.title}`}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setSelectedProject(project)
-                    }}
-                  >
-                    <span>Explore Architecture</span>
-                    <ChevronRight size={16} aria-hidden="true" />
-                  </button>
-                </div>
-              </SpotlightCard>
-            </Motion.div>
-          ))}
-        </AnimatePresence>
-      </Motion.div>
-
-      {/* Project Detail Modal */}
+      {/* Project Architecture Modal */}
       <AnimatePresence>
         {selectedProject && (
           <Motion.div
@@ -236,16 +240,16 @@ export function Projects({
             />
 
             <Motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 12 }}
-              transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="modal-content-panel"
             >
               <div className="modal-header">
                 <div className="modal-tags">
-                  <span className="project-domain-tag">{selectedProject.domainLabel}</span>
-                  <span className="project-type-label">{selectedProject.type}</span>
+                  <span className="modal-domain-label">{selectedProject.domainLabel}</span>
+                  <span className="modal-type-label">{selectedProject.type}</span>
                 </div>
                 <button
                   className="modal-close-btn"
@@ -276,9 +280,9 @@ export function Projects({
 
                 <div className="modal-section">
                   <h4 className="modal-subheading">Technologies &amp; Hardware</h4>
-                  <div className="chip-row">
+                  <div className="modal-stack-line">
                     {selectedProject.stack.map((tech) => (
-                      <span key={tech} className="tech-chip highlight">
+                      <span key={tech} className="modal-stack-token">
                         {tech}
                       </span>
                     ))}
@@ -299,23 +303,13 @@ export function Projects({
 
                 {(selectedProject.systemHighlight || selectedProject.repoNote) && (
                   <div className="modal-note-box">
-                    <Sparkles size={18} className="note-icon" aria-hidden="true" />
-                    <div className="modal-note-content">
+                    <Sparkles size={17} className="note-icon" aria-hidden="true" />
+                    <div>
                       <span className="modal-note-title">Architecture Highlight</span>
                       <p>{selectedProject.systemHighlight || selectedProject.repoNote}</p>
                     </div>
                   </div>
                 )}
-              </div>
-
-              <div className="modal-footer">
-                <button
-                  className="button primary-btn"
-                  type="button"
-                  onClick={() => setSelectedProject(null)}
-                >
-                  Close Details
-                </button>
               </div>
             </Motion.div>
           </Motion.div>

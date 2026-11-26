@@ -18,23 +18,19 @@ export function Footer({ brandProfile }) {
           </div>
         </div>
 
-        <div className="footer-center">
-          <p className="footer-copy">
-            © {currentYear} {brandProfile.name} — Engineered with React 19, Motion &amp; Tailwind CSS.
-          </p>
-        </div>
+        <p className="footer-copy">
+          © {currentYear} {brandProfile.name}
+        </p>
 
-        <div className="footer-actions">
-          <button
-            className="back-to-top-btn"
-            onClick={scrollToTop}
-            aria-label="Scroll back to top of page"
-            type="button"
-          >
-            <span>Back to top</span>
-            <ArrowUp size={15} aria-hidden="true" />
-          </button>
-        </div>
+        <button
+          className="back-to-top-btn"
+          onClick={scrollToTop}
+          aria-label="Scroll back to top of page"
+          type="button"
+        >
+          <span>Top</span>
+          <ArrowUp size={15} aria-hidden="true" />
+        </button>
       </div>
     </footer>
   )

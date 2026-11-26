@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
-import { motion as Motion, AnimatePresence } from 'motion/react'
-import { Command, Download, Menu, Moon, Sun, X } from 'lucide-react'
+import { AnimatePresence, motion as Motion, useScroll, useSpring } from 'motion/react'
+import { Command, Menu, Moon, Sun, X } from 'lucide-react'
 
 export function Header({
   brandProfile,
   navigationItems,
-  resumeLink,
   theme,
   toggleTheme,
   onOpenCommand,
@@ -13,6 +12,9 @@ export function Header({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const [scrolled, setScrolled] = useState(false)
+
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 180, damping: 28, restDelta: 0.001 })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +24,7 @@ export function Header({
         .map((item) => item.href.replace('#', ''))
         .filter(Boolean)
 
-      const scrollPos = window.scrollY + 160
+      const scrollPos = window.scrollY + 180
 
       for (let i = sections.length - 1; i >= 0; i -= 1) {
         const el = document.getElementById(sections[i])
@@ -44,17 +46,19 @@ export function Header({
 
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+      {/* Thin Scroll Progress Hairline */}
+      <Motion.div className="scroll-progress-line" style={{ scaleX }} aria-hidden="true" />
+
       <div className="header-inner">
         <a className="brand-lockup" href="#top" aria-label="Mohamed Mufassir - Return to top">
           <span className="brand-mark">{brandProfile.monogram}</span>
           <span className="brand-copy">
             <strong>{brandProfile.name}</strong>
-            <small>Systems Engineer • TechTitude Labs</small>
           </span>
         </a>
 
-        {/* Desktop Floating Pill Navigation (Ref 1 + Ref 4 style) */}
-        <nav className="site-nav desktop-nav" aria-label="Primary navigation">
+        {/* Clean Unboxed Minimal Navigation (Ref 1 + Ref 2 + Ref 3) */}
+        <nav className="desktop-nav" aria-label="Primary navigation">
           {navigationItems.map((item) => {
             const sectionId = item.href.replace('#', '')
             const isActive = activeSection === sectionId
@@ -65,14 +69,14 @@ export function Header({
                 href={item.href}
                 className={`nav-link ${isActive ? 'is-active' : ''}`}
               >
+                <span>{item.label}</span>
                 {isActive && (
                   <Motion.span
-                    layoutId="nav-active-pill"
-                    className="nav-active-pill"
+                    layoutId="nav-underline"
+                    className="nav-underline"
                     transition={{ type: 'spring', stiffness: 420, damping: 32 }}
                   />
                 )}
-                <span className="relative z-10">{item.label}</span>
               </a>
             )
           })}
@@ -81,7 +85,7 @@ export function Header({
         <div className="header-actions">
           <button
             type="button"
-            className="cmdk-trigger-btn"
+            className="icon-action-btn cmdk-btn"
             onClick={onOpenCommand}
             aria-label="Open quick navigation menu (Ctrl+K)"
             title="Quick Jump (Ctrl+K)"
@@ -91,19 +95,35 @@ export function Header({
           </button>
 
           <button
-            className="theme-toggle-btn"
+            className="icon-action-btn"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             type="button"
           >
-            {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+            {theme === 'dark' ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
           </button>
 
-          <a className="header-cta" href={resumeLink.href} download>
-            <span>Resume</span>
-            <Download size={15} aria-hidden="true" />
-          </a>
+          <div className="header-cta-wrap">
+            <a className="header-cta" href="#contact">
+              Let&apos;s Work
+            </a>
+            {/* Subtle Ref 1 Kawsar curved hand-drawn annotation cue */}
+            <svg
+              className="header-doodle-arrow"
+              viewBox="0 0 46 38"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 34 C12 24, 10 18, 22 20 C31 21, 34 12, 34 4 M29 9 L34 3 L40 9"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
 
           <button
             className="mobile-menu-button"

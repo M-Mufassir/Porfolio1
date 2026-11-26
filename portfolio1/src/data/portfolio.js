@@ -1,6 +1,5 @@
 export const navigationItems = [
   { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
   { label: 'Process', href: '#process' },
   { label: 'Experience', href: '#experience' },
@@ -13,10 +12,10 @@ export const brandProfile = {
   title: 'Computer Systems Engineering Undergraduate | Co-Founder @ TechTitude Labs',
   tagline: 'Embedded Systems, Autonomous Robotics & Telecommunication Infrastructure',
   summary:
-    'Computer Systems Engineering undergraduate at SLIIT and Co-Founder of TechTitude Labs. Specializing in bare-metal firmware, closed-loop control systems, autonomous robotics, and fiber optics infrastructure to engineer dependable, real-world solutions.',
+    'Computer Systems Engineering undergraduate at SLIIT and Co-Founder of TechTitude Labs. Engineering bare-metal microcontroller firmware, closed-loop robotics, and fiber optic infrastructure for real-world deployment.',
   location: 'Thihariya, Sri Lanka',
   education: 'BSc (Hons) in Computer Systems Engineering, SLIIT',
-  availability: 'Open for Engineering Opportunities & Collaborations',
+  availability: 'Available for Engineering & R&D Collaborations',
 }
 
 export const heroRoles = [
@@ -26,137 +25,43 @@ export const heroRoles = [
   'FIRMWARE ARCHITECT',
 ]
 
-export const heroMetrics = [
-  { label: 'Specialization', value: 'Embedded & Autonomous Systems' },
-  { label: 'Venture', value: 'Co-Founder @ TechTitude Labs' },
-  { label: 'Academic Base', value: 'SLIIT (2023 — 2027)' },
+export const techRibbonItems = [
+  'C / Embedded C',
+  'AVR Assembly',
+  'ATmega328P',
+  'ESP32-CAM',
+  'Raspberry Pi',
+  'PID Control',
+  'FSM Logic',
+  'Fiber Optics',
+  'React & TypeScript',
+  'Electron.js',
+  'Spring Boot',
+  'PostgreSQL',
+  'Docker',
 ]
 
-export const telemetryStats = [
-  {
-    value: 11,
-    suffix: '+',
-    label: 'Engineered Systems',
-    detail: 'Robotics, Firmware & Full-Stack',
-    icon: 'cpu',
-  },
-  {
-    value: 4,
-    suffix: '',
-    label: 'Core Domains',
-    detail: 'Robotics, Embedded, Telecom, Software',
-    icon: 'layers',
-  },
-  {
-    value: 2024,
-    suffix: '+',
-    label: 'TechTitude Labs',
-    detail: 'Hardware R&D Venture Leadership',
-    icon: 'zap',
-  },
-  {
-    value: 2027,
-    prefix: "'",
-    shortValue: "SLIIT '27",
-    label: 'BSc (Hons) CSE',
-    detail: 'Computer Systems Engineering',
-    icon: 'graduation',
-  },
-]
-
-export const coreCapabilities = [
-  {
-    title: 'Bare-Metal & Firmware',
-    description:
-      'Register-level Embedded C & AVR Assembly with deterministic interrupts and sub-millisecond timing loops.',
-    icon: 'cpu',
-  },
-  {
-    title: 'Autonomous Robotics',
-    description:
-      'Sensor fusion, closed-loop PID motor speed control, and multi-state FSM navigation behaviors.',
-    icon: 'bot',
-  },
-  {
-    title: 'Optical & Telecom Ops',
-    description:
-      'Fiber rollout feasibility, link budget modeling, splicing coordination, and signal modulation analysis.',
-    icon: 'radio',
-  },
-  {
-    title: 'IoT & Edge Telemetry',
-    description:
-      'ESP32-CAM live MJPEG streaming, UART/I2C/SPI buses, and real-time Telegram & web control surfaces.',
-    icon: 'wifi',
-  },
-  {
-    title: 'PCB & Digital Logic',
-    description:
-      'Circuit prototyping, synchronous sequential FSM logic, shift registers, and oscilloscope validation.',
-    icon: 'circuit',
-  },
-  {
-    title: 'Full-Stack & Desktop',
-    description:
-      'Production React, TypeScript, Electron.js desktop POS systems, Spring Boot APIs, and PostgreSQL.',
-    icon: 'code',
-  },
-]
-
-export const engineeringProcess = [
-  {
-    step: '01',
-    title: 'System Architecture',
-    description: 'Define timing budgets, protocol topology, hardware BOM, and state transition requirements.',
-    icon: 'compass',
-  },
-  {
-    step: '02',
-    title: 'Schematic & Logic',
-    description: 'Design digital logic, sensor interfaces, PCB footprints, and communication buses.',
-    icon: 'circuit',
-  },
-  {
-    step: '03',
-    title: 'Firmware & Code',
-    description: 'Implement register-level AVR/ESP32 firmware, PID control loops, and full-stack software.',
-    icon: 'terminal',
-  },
-  {
-    step: '04',
-    title: 'Bench & HIL Test',
-    description: 'Verify RPM response curves, signal integrity, and edge cases on physical hardware.',
-    icon: 'activity',
-  },
-  {
-    step: '05',
-    title: 'Field Deployment',
-    description: 'Ship reliable hardware-software systems, fiber infrastructure rollouts, and client apps.',
-    icon: 'rocket',
-  },
-]
-
-export const featuredProjectTitles = [
-  'AVR - Assembly Autonomous Line-Following Car with Smart Parking',
-  'ESP32-CAM Remote-Controlled Car with Live Video Streaming',
-  'PID-Based DC Motor Speed Control System',
+export const inlineMetrics = [
+  { value: 11, suffix: '+', label: 'Systems Engineered' },
+  { value: 4, suffix: '', label: 'Core Domains' },
+  { value: 2024, suffix: '+', label: 'TechTitude Labs' },
 ]
 
 export const aboutHighlights = [
   {
     title: 'Bare-Metal & Real-Time Firmware',
     description:
-      'Architecting deterministic microcontroller firmware through register-level programming, interrupt-driven design, and optimized low-level Embedded C and AVR Assembly.',
+      'Register-level Embedded C and AVR Assembly with deterministic interrupts and tight hardware timing.',
   },
   {
     title: 'Autonomous Robotics & Control Dynamics',
     description:
-      'Developing closed-loop PID controllers, sensor fusion logic, finite state machine intelligence, and low-latency wireless telemetry for autonomous navigation.',
+      'Closed-loop PID speed regulation, multi-sensor fusion, FSM navigation, and live wireless telemetry.',
   },
   {
-    title: 'Venture Leadership & Rapid Prototyping',
+    title: 'Telecom Infrastructure & Venture R&D',
     description:
-      'Spearheading hardware R&D and engineering client solutions at TechTitude Labs — guiding products from schematic design and breadboarding to field-tested deployments.',
+      'Optical fiber route feasibility and full-cycle hardware prototyping at TechTitude Labs.',
   },
 ]
 
@@ -176,6 +81,34 @@ export const skillSections = [
   {
     title: 'Software Platforms & DevOps',
     items: ['React', 'Vue.js', 'Electron.js', 'Spring Boot', 'PostgreSQL', 'Docker', 'Git'],
+  },
+]
+
+export const engineeringProcess = [
+  {
+    step: '01',
+    title: 'Architecture',
+    description: 'Define timing budgets, protocol topology, hardware BOM, and state machine specs.',
+  },
+  {
+    step: '02',
+    title: 'Schematic & Logic',
+    description: 'Design clocked digital logic, sensor conditioning, PCB footprints, and bus routing.',
+  },
+  {
+    step: '03',
+    title: 'Firmware & Code',
+    description: 'Author bare-metal AVR/ESP32 firmware, PID control loops, and full-stack software.',
+  },
+  {
+    step: '04',
+    title: 'Bench & HIL Test',
+    description: 'Validate RPM step response, signal integrity, and edge faults on live hardware.',
+  },
+  {
+    step: '05',
+    title: 'Field Rollout',
+    description: 'Deploy dependable hardware-software systems, optical fiber routes, and client apps.',
   },
 ]
 
@@ -482,6 +415,14 @@ export const interestAreas = [
   'IoT & Edge Computing',
   'Real-Time Systems',
   'Digital Systems Design',
+]
+
+export const inquiryTopics = [
+  'Embedded / Firmware',
+  'Autonomous Robotics',
+  'Optical Telecom',
+  'IoT Systems',
+  'Full-Stack / Desktop App',
 ]
 
 export const resumeLink = {

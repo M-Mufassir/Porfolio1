@@ -1,97 +1,68 @@
-import { Download } from 'lucide-react'
 import { motion as Motion } from 'motion/react'
-import { SpotlightCard } from './SpotlightCard'
-import { ShinyText, SplitText } from './TextAnimations'
+import { Download } from 'lucide-react'
+import { SplitText } from './TextAnimations'
 
+/**
+ * Clean 2-column open editorial experience ledger + minimal inline CV strip (ZERO boxy cards!).
+ */
 export function Experience({ experiences, experience, freelanceExperience, resumeLink }) {
   const experienceList = experiences || [experience, freelanceExperience].filter(Boolean)
 
   return (
     <>
-      <section className="section-block" id="experience">
+      <section className="section-open" id="experience">
         <div className="section-heading">
-          <span className="section-eyebrow">Career Milestones</span>
+          <span className="section-eyebrow">Career &amp; Venture</span>
           <h2 className="section-title">
-            <SplitText text="Professional Experience & Venture Leadership" mode="words" />
+            <SplitText text="Experience & Leadership" mode="words" />
           </h2>
-          <p className="section-subtitle">
-            Applying engineering rigor across optical telecommunications infrastructure, hardware startup leadership, cross-platform software engineering, and client deliverables.
-          </p>
         </div>
 
-        <div className="timeline-container">
-          {experienceList.map((item, index) => {
-            const isLast = index === experienceList.length - 1
+        <div className="exp-ledger">
+          {experienceList.map((item, index) => (
+            <Motion.article
+              key={`${item.role}-${item.period}`}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.42, delay: index * 0.06 }}
+              className="exp-ledger-row"
+            >
+              <div className="exp-meta-col">
+                <span className="exp-period">{item.period}</span>
+                <strong className="exp-company">{item.company}</strong>
+                <span className="exp-cat">{item.category}</span>
+              </div>
 
-            return (
-              <Motion.article
-                key={`${item.role}-${item.period}`}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="timeline-item"
-              >
-                <div className="timeline-marker" aria-hidden="true">
-                  <div className="timeline-dot" />
-                  {!isLast && <div className="timeline-line" />}
-                </div>
-
-                <SpotlightCard className="timeline-card">
-                  <div className="timeline-card-header">
-                    <div>
-                      <div className="timeline-badge-row">
-                        <span className="card-pill">{item.category || 'Role'}</span>
-                        {item.company && <span className="timeline-company">{item.company}</span>}
-                      </div>
-                      <h3 className="timeline-role">{item.role}</h3>
-                    </div>
-                    <span className="timeline-period">{item.period}</span>
-                  </div>
-
-                  <p className="timeline-summary">{item.summary}</p>
-
-                  {item.points && item.points.length > 0 && (
-                    <ul className="timeline-points">
-                      {item.points.map((point) => (
-                        <li key={point} className="timeline-point">
-                          <span className="point-bullet" aria-hidden="true">✦</span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </SpotlightCard>
-              </Motion.article>
-            )
-          })}
+              <div className="exp-detail-col">
+                <h3 className="exp-role">{item.role}</h3>
+                <p className="exp-summary">{item.summary}</p>
+                {item.points && item.points.length > 0 && (
+                  <ul className="exp-points">
+                    {item.points.map((point) => (
+                      <li key={point}>
+                        <span className="exp-bullet" aria-hidden="true">—</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </Motion.article>
+          ))}
         </div>
-      </section>
 
-      {/* Resume Section Banner */}
-      <section className="section-block resume-section" id="resume">
-        <SpotlightCard beam className="resume-banner-card">
-          <div className="resume-banner-grid">
-            <div className="resume-banner-content">
-              <span className="section-eyebrow">Formal Credentials</span>
-              <h2 className="resume-banner-title">Comprehensive Technical Curriculum Vitae</h2>
-              <p className="resume-banner-desc">
-                Download my detailed technical CV covering academic coursework at SLIIT, embedded hardware prototypes, fiber optic infrastructure coordination, and software development experience.
-              </p>
-            </div>
-
-            <div className="resume-banner-action">
-              <a
-                className="button metallic-cta-btn resume-download-btn"
-                href={resumeLink.href}
-                download
-              >
-                <Download size={18} aria-hidden="true" />
-                <ShinyText>{resumeLink.label}</ShinyText>
-              </a>
-            </div>
+        {/* Inline Hairline Technical CV Strip */}
+        <div className="cv-inline-strip" id="resume">
+          <div className="cv-inline-copy">
+            <span>CURRICULUM VITAE</span>
+            <strong>Full engineering specifications, SLIIT coursework &amp; project history.</strong>
           </div>
-        </SpotlightCard>
+          <a className="btn-outline-clean" href={resumeLink.href} download>
+            <Download size={16} aria-hidden="true" />
+            <span>{resumeLink.label}</span>
+          </a>
+        </div>
       </section>
     </>
   )
