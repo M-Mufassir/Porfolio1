@@ -12,11 +12,18 @@ export function Footer({ brandProfile, navigationItems }) {
     <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <span className="brand-mark">{brandProfile.monogram}</span>
-          <div>
-            <strong>{brandProfile.name}</strong>
-            <p className="footer-tagline">{brandProfile.tagline}</p>
-          </div>
+          <Link to="/" aria-label="MUFASSIR.dev - Home">
+            <picture className="footer-logo-picture">
+              <source srcSet="/images/mufassir-logo.webp" type="image/webp" />
+              <img
+                src="/images/mufassir-logo.png"
+                alt="MUFASSIR.dev"
+                className="footer-logo-img"
+                loading="lazy"
+              />
+            </picture>
+          </Link>
+          <p className="footer-tagline">{brandProfile.tagline}</p>
         </div>
 
         <nav className="footer-routes" aria-label="Footer page links">

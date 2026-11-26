@@ -31,11 +31,15 @@ export function Header({
       <Motion.div className="scroll-progress-line" style={{ scaleX }} aria-hidden="true" />
 
       <div className="header-inner">
-        <Link className="brand-lockup" to="/" aria-label="Mohamed Mufassir - Home">
-          <span className="brand-mark">{brandProfile.monogram}</span>
-          <span className="brand-copy">
-            <strong>{brandProfile.name}</strong>
-          </span>
+        <Link className="brand-lockup" to="/" aria-label={`${brandProfile.name} - Home`}>
+          <picture className="brand-logo-picture">
+            <source srcSet="/images/mufassir-logo.webp" type="image/webp" />
+            <img
+              src="/images/mufassir-logo.png"
+              alt="MUFASSIR.dev"
+              className="brand-logo-img"
+            />
+          </picture>
         </Link>
 
         {/* Multi-Page Navigation Links with Animated Active Underline */}
