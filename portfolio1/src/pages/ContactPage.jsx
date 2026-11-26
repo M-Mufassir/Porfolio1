@@ -1,5 +1,5 @@
 import { motion as Motion } from 'motion/react'
-import { Contact } from '../components'
+import { Contact, PageSEO } from '../components'
 
 export function ContactPage({
   contactLinks,
@@ -17,6 +17,12 @@ export function ContactPage({
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className="subpage-shell"
     >
+      <PageSEO
+        title="Hire & Contact Mohamed Mufassir | Freelance Software, IoT, Embedded & Robotics"
+        description="Contact Mohamed Mufassir (+94 77 423 3426, +94 71 423 3425, mufassirriswan@gmail.com) for freelance Software, IoT, Embedded Systems, and Robotics projects."
+        path="/contact"
+        keywords="Hire Mohamed Mufassir, Freelance Embedded Engineer Sri Lanka, IoT Developer, Robotics Freelancer, Software Developer Sri Lanka"
+      />
       <div className="subpage-banner">
         <span className="section-eyebrow">04 / COLLABORATION &amp; FREELANCE</span>
         <h1 className="subpage-headline">

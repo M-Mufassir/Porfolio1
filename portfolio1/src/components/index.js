@@ -13,6 +13,7 @@ export { Footer } from './Footer'
 export { BackgroundCanvas } from './BackgroundCanvas'
 export { MagneticCursor } from './MagneticCursor'
 export { CommandMenu } from './CommandMenu'
+export { PageSEO } from './PageSEO'
 export {
   SplitText,
   BlurText,

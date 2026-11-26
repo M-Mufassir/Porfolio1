@@ -115,6 +115,10 @@ export function Hero({ brandProfile, heroRoles, techRibbonItems, resumeLink }) {
                 src="/images/mufassir-cutout.png"
                 alt="Mohamed Mufassir — Embedded Systems and Robotics Enthusiast"
                 className="hero-cutout-portrait"
+                width="1122"
+                height="1402"
+                loading="eager"
+                fetchPriority="high"
               />
             </picture>
           </div>

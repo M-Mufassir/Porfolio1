@@ -1,5 +1,5 @@
 import { motion as Motion } from 'motion/react'
-import { About, ProcessTimeline, Skills } from '../components'
+import { About, PageSEO, ProcessTimeline, Skills } from '../components'
 
 export function AboutPage({
   aboutHighlights,
@@ -17,6 +17,12 @@ export function AboutPage({
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className="subpage-shell"
     >
+      <PageSEO
+        title="About & Engineering Stack | Mohamed Mufassir — SLIIT & TechTitude Labs"
+        description="Technical philosophy, embedded C & AVR Assembly skills, closed-loop PID robotics, optical telecom infrastructure, and 5-step engineering workflow of Mohamed Mufassir."
+        path="/about"
+        keywords="Mohamed Mufassir skills, AVR Assembly, Embedded C, PID Control, Optical Fiber, SLIIT Computer Systems Engineering"
+      />
       <div className="subpage-banner">
         <span className="section-eyebrow">01 / PROFILE &amp; DISCIPLINES</span>
         <h1 className="subpage-headline">

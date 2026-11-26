@@ -1,5 +1,5 @@
 import { motion as Motion } from 'motion/react'
-import { Projects } from '../components'
+import { PageSEO, Projects } from '../components'
 
 export function ProjectsPage({ projectCards, selectedProject, setSelectedProject }) {
   return (
@@ -10,6 +10,12 @@ export function ProjectsPage({ projectCards, selectedProject, setSelectedProject
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className="subpage-shell"
     >
+      <PageSEO
+        title="Projects — Robotics, AVR Assembly, ESP32-CAM & Software | Mohamed Mufassir"
+        description="Explore 11+ engineered systems by Mohamed Mufassir: AVR assembly autonomous parking car, ESP32-CAM live streaming rover, Raspberry Pi PID motor controller, IoT surveillance, Electron POS, and Spring Boot apps."
+        path="/projects"
+        keywords="AVR assembly robot, ESP32-CAM car, Raspberry Pi PID motor control, IoT surveillance, Electron POS, Mohamed Mufassir projects"
+      />
       <div className="subpage-banner">
         <span className="section-eyebrow">02 / ENGINEERING ARCHIVE</span>
         <h1 className="subpage-headline">

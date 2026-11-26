@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { motion as Motion } from 'motion/react'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import { Hero, WorkTogether } from '../components'
+import { Hero, PageSEO, WorkTogether } from '../components'
 
 export function HomePage({
   brandProfile,
@@ -26,6 +26,12 @@ export function HomePage({
       transition={{ duration: 0.28 }}
       className="page-transition-wrap"
     >
+      <PageSEO
+        title="Mohamed Mufassir | Embedded Systems, Robotics & Software Engineer"
+        description="Portfolio of Mohamed Mufassir (MUFASSIR.dev) — Embedded Systems & Robotics Enthusiast, Computer Systems Engineering undergraduate at SLIIT & Co-Founder of TechTitude Labs. Available for Software, IoT, Embedded & Robotics projects."
+        path="/"
+        keywords="Mohamed Mufassir, MUFASSIR.dev, Embedded Systems, Autonomous Robotics, TechTitude Labs, SLIIT, Freelance Software IoT Robotics Sri Lanka"
+      />
       <Hero
         brandProfile={brandProfile}
         heroRoles={heroRoles}
