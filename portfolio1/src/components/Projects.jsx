@@ -229,6 +229,7 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="project-modal-layer"
+            data-lenis-prevent
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-project-title"
@@ -245,6 +246,8 @@ export function Projects({ projectCards, selectedProject, setSelectedProject }) 
               exit={{ opacity: 0, scale: 0.96, y: 12 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="modal-content-panel"
+              data-lenis-prevent
+              tabIndex={-1}
             >
               <div className="modal-header">
                 <div className="modal-tags">

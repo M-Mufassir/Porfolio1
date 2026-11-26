@@ -72,7 +72,7 @@ export function CommandMenu({
           </button>
         </div>
 
-        <Command.List className="cmdk-list">
+        <Command.List className="cmdk-list" data-lenis-prevent>
           <Command.Empty className="cmdk-empty">No matching pages, systems, or commands found.</Command.Empty>
 
           <Command.Group heading="Pages" className="cmdk-group">
@@ -134,7 +134,7 @@ export function CommandMenu({
               <Command.Item
                 value="copy email address contact"
                 onSelect={() => {
-                  onCopyEmail(emailContact.value)
+                  onCopyEmail(emailContact.value, 'Email')
                   setOpen(false)
                 }}
                 className="cmdk-item"

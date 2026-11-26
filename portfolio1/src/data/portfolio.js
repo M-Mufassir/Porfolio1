@@ -418,11 +418,42 @@ export const interestAreas = [
 ]
 
 export const inquiryTopics = [
-  'Embedded / Firmware',
-  'Autonomous Robotics',
-  'Optical Telecom',
-  'IoT Systems',
-  'Full-Stack / Desktop App',
+  'Software',
+  'IoT',
+  'Embedded Systems',
+  'Robotics',
+  'Telecom / R&D',
+]
+
+export const freelanceTracks = [
+  {
+    num: '01',
+    topic: 'Software',
+    title: 'Software Engineering',
+    description:
+      'Production React & TypeScript web apps, cross-platform Electron.js desktop tools, Spring Boot REST APIs, and PostgreSQL systems.',
+  },
+  {
+    num: '02',
+    topic: 'IoT',
+    title: 'IoT & Connected Edge',
+    description:
+      'ESP32/ESP32-CAM devices, live MJPEG video & sensor streaming, Telegram/cloud alerts, and remote monitoring dashboards.',
+  },
+  {
+    num: '03',
+    topic: 'Embedded Systems',
+    title: 'Embedded Systems & Firmware',
+    description:
+      'Bare-metal C & AVR Assembly microcontroller programming, UART/SPI/I2C interfacing, PCB prototyping, and bench validation.',
+  },
+  {
+    num: '04',
+    topic: 'Robotics',
+    title: 'Autonomous Robotics & Control',
+    description:
+      'Closed-loop PID motor speed regulation, IR/encoder sensor fusion, finite state machine autonomy, and prototype builds.',
+  },
 ]
 
 export const resumeLink = {
@@ -434,9 +465,30 @@ export const contactLinks = [
   {
     label: 'Email',
     value: 'mufassirriswan@gmail.com',
-    note: 'Direct channel for engineering roles, technical discussions, and collaborative projects.',
+    note: 'Primary channel for freelance briefs, engineering projects, and technical inquiries.',
     href: 'mailto:mufassirriswan@gmail.com',
     action: 'Send an email',
+    copyable: true,
+  },
+  {
+    label: 'Phone / WhatsApp 1',
+    value: '+94 77 423 3426',
+    rawValue: '+94774233426',
+    note: 'Direct mobile line & WhatsApp for project discussions and urgent consultations.',
+    href: 'tel:+94774233426',
+    whatsapp: 'https://wa.me/94774233426',
+    action: 'Call +94 77 423 3426',
+    copyable: true,
+  },
+  {
+    label: 'Phone / WhatsApp 2',
+    value: '+94 71 423 3425',
+    rawValue: '+94714233425',
+    note: 'Alternate direct contact line for freelance collaborations and project inquiries.',
+    href: 'tel:+94714233425',
+    whatsapp: 'https://wa.me/94714233425',
+    action: 'Call +94 71 423 3425',
+    copyable: true,
   },
   {
     label: 'LinkedIn',

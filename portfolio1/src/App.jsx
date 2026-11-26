@@ -13,6 +13,7 @@ import {
   experience,
   experiences,
   freelanceExperience,
+  freelanceTracks,
   heroRoles,
   inlineMetrics,
   inquiryTopics,
@@ -41,7 +42,7 @@ import {
 function App() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [commandOpen, setCommandOpen] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [copiedInfo, setCopiedInfo] = useState(null)
   const location = useLocation()
   const lenisRef = useRef(null)
 
@@ -60,10 +61,10 @@ function App() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }
 
-  const handleCopyEmail = (email) => {
-    navigator.clipboard?.writeText(email)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 2600)
+  const handleCopyContact = (value, label = 'Contact') => {
+    navigator.clipboard?.writeText(value)
+    setCopiedInfo({ value, label })
+    window.setTimeout(() => setCopiedInfo(null), 2600)
   }
 
   useEffect(() => {
@@ -103,6 +104,16 @@ function App() {
     }
   }, [])
 
+  // Pause Lenis while a modal or command dialog is open so native modal scrolling works cleanly
+  useEffect(() => {
+    if (!lenisRef.current) return
+    if (selectedProject || commandOpen) {
+      lenisRef.current.stop()
+    } else {
+      lenisRef.current.start()
+    }
+  }, [selectedProject, commandOpen])
+
   // Reset scroll position to top cleanly on every route navigation
   useEffect(() => {
     if (lenisRef.current) {
@@ -139,7 +150,11 @@ function App() {
                   techRibbonItems={techRibbonItems}
                   resumeLink={resumeLink}
                   projectCards={projectCards}
+                  freelanceTracks={freelanceTracks}
+                  contactLinks={contactLinks}
                   onOpenProject={setSelectedProject}
+                  onCopyContact={handleCopyContact}
+                  copiedValue={copiedInfo?.value}
                 />
               }
             />
@@ -183,9 +198,10 @@ function App() {
                 <ContactPage
                   contactLinks={contactLinks}
                   inquiryTopics={inquiryTopics}
+                  freelanceTracks={freelanceTracks}
                   brandProfile={brandProfile}
-                  onCopyEmail={handleCopyEmail}
-                  copied={copied}
+                  onCopyContact={handleCopyContact}
+                  copiedValue={copiedInfo?.value}
                 />
               }
             />
@@ -198,7 +214,11 @@ function App() {
                   techRibbonItems={techRibbonItems}
                   resumeLink={resumeLink}
                   projectCards={projectCards}
+                  freelanceTracks={freelanceTracks}
+                  contactLinks={contactLinks}
                   onOpenProject={setSelectedProject}
+                  onCopyContact={handleCopyContact}
+                  copiedValue={copiedInfo?.value}
                 />
               }
             />
@@ -218,13 +238,13 @@ function App() {
         contactLinks={contactLinks}
         theme={theme}
         toggleTheme={toggleTheme}
-        onCopyEmail={handleCopyEmail}
+        onCopyEmail={handleCopyContact}
       />
 
-      {copied && (
+      {copiedInfo && (
         <div className="toast-notification" role="status" aria-live="polite">
           <Check size={16} aria-hidden="true" />
-          <span>Email copied to clipboard!</span>
+          <span>{copiedInfo.label} copied to clipboard!</span>
         </div>
       )}
     </div>

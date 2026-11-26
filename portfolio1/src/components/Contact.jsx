@@ -1,21 +1,36 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { motion as Motion } from 'motion/react'
-import { ArrowUpRight, Check, Copy, MapPin, Send } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, MapPin, MessageCircle, Send } from 'lucide-react'
 import { SplitText } from './TextAnimations'
 
-export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail, copied }) {
+export function Contact({
+  contactLinks,
+  inquiryTopics,
+  freelanceTracks,
+  brandProfile,
+  onCopyContact,
+  copiedValue,
+}) {
+  const [searchParams] = useSearchParams()
+  const initialTopic = searchParams.get('topic')
+  const matchedTopic =
+    inquiryTopics.find((t) => t.toLowerCase() === (initialTopic || '').toLowerCase()) ||
+    inquiryTopics[0] ||
+    'Software'
+
   const emailContact = contactLinks.find((c) => c.label.toLowerCase() === 'email')
   const [name, setName] = useState('')
   const [senderEmail, setSenderEmail] = useState('')
-  const [selectedTopic, setSelectedTopic] = useState(inquiryTopics[0] || 'Embedded / Firmware')
+  const [selectedTopic, setSelectedTopic] = useState(matchedTopic)
   const [message, setMessage] = useState('')
 
   const handleInquirySubmit = (e) => {
     e.preventDefault()
     if (!emailContact) return
-    const subject = encodeURIComponent(`[Portfolio Inquiry] ${selectedTopic} — ${name || 'Collaboration'}`)
+    const subject = encodeURIComponent(`[Freelance / Project] ${selectedTopic} — ${name || 'Inquiry'}`)
     const body = encodeURIComponent(
-      `Hi Mufassir,\n\nName: ${name || 'Not provided'}\nEmail: ${senderEmail || 'Not provided'}\nArea: ${selectedTopic}\n\n${message || 'Interested in discussing an engineering collaboration.'}`
+      `Hi Mufassir,\n\nName: ${name || 'Not provided'}\nEmail: ${senderEmail || 'Not provided'}\nFocus Area: ${selectedTopic}\n\n${message || 'Interested in collaborating on a project.'}`
     )
     window.location.href = `mailto:${emailContact.value}?subject=${subject}&body=${body}`
   }
@@ -23,7 +38,7 @@ export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail
   return (
     <section className="section-open" id="contact">
       <div className="contact-split-layout">
-        {/* Left Side: Open Editorial Call + Direct Channel Links (Zero Cards!) */}
+        {/* Left Side: Direct Channels (Gmail, Both Phone/WhatsApp Lines, LinkedIn, GitHub) */}
         <Motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -31,18 +46,21 @@ export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail
           transition={{ duration: 0.48 }}
           className="contact-left-col"
         >
-          <span className="section-eyebrow">Get In Touch</span>
+          <span className="section-eyebrow">Let&apos;s Work Together</span>
           <h2 className="contact-big-title">
-            <SplitText text="Let's engineer something extraordinary." mode="words" />
+            <SplitText text="Let's build your next system." mode="words" />
           </h2>
           <p className="contact-lead-copy">
-            Open for embedded firmware R&amp;D, autonomous robotics, optical telecom projects, and software engineering collaborations.
+            Available for freelance builds, technical consulting, and R&amp;D collaborations specializing in{' '}
+            <strong>Software</strong>, <strong>IoT</strong>, <strong>Embedded Systems</strong>, and{' '}
+            <strong>Robotics</strong>.
           </p>
 
           <div className="contact-direct-list">
             {contactLinks.map((item) => {
               const isExternal = /^https?:/i.test(item.href)
-              const isEmail = item.label.toLowerCase() === 'email'
+              const copyTarget = item.rawValue || item.value
+              const isCopied = copiedValue === copyTarget
               return (
                 <div key={item.label} className="contact-direct-row">
                   <span className="contact-direct-label">{item.label}</span>
@@ -56,15 +74,33 @@ export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail
                       <span>{item.value}</span>
                       <ArrowUpRight size={15} aria-hidden="true" />
                     </a>
-                    {isEmail && (
+                    {item.whatsapp && (
+                      <a
+                        href={item.whatsapp}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="contact-copy-inline wa"
+                        aria-label={`Chat on WhatsApp ${item.value}`}
+                        title="WhatsApp"
+                      >
+                        <MessageCircle size={13} />
+                        <span>WA</span>
+                      </a>
+                    )}
+                    {item.copyable && (
                       <button
                         type="button"
-                        onClick={() => onCopyEmail(item.value)}
+                        onClick={() =>
+                          onCopyContact(
+                            copyTarget,
+                            item.label.toLowerCase().includes('phone') ? 'Phone number' : 'Email'
+                          )
+                        }
                         className="contact-copy-inline"
-                        aria-label="Copy email address"
+                        aria-label={`Copy ${item.value}`}
                       >
-                        {copied ? <Check size={14} /> : <Copy size={14} />}
-                        <span>{copied ? 'Copied' : 'Copy'}</span>
+                        {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                        <span>{isCopied ? 'Copied' : 'Copy'}</span>
                       </button>
                     )}
                   </div>
@@ -82,7 +118,7 @@ export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail
           </div>
         </Motion.div>
 
-        {/* Right Side: Unboxed Underline-Input Inquiry Form (Ref 1 Kawsar style!) */}
+        {/* Right Side: Unboxed Underline-Input Freelance Inquiry Form */}
         <Motion.form
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -114,7 +150,7 @@ export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail
           </div>
 
           <div className="topic-selector-block">
-            <span className="topic-label">Interested in</span>
+            <span className="topic-label">Freelance Focus Area</span>
             <div className="topic-chips-wrap">
               {inquiryTopics.map((topic) => {
                 const active = selectedTopic === topic
@@ -133,23 +169,41 @@ export function Contact({ contactLinks, inquiryTopics, brandProfile, onCopyEmail
           </div>
 
           <label className="underline-field">
-            <span>Project or Role Brief</span>
+            <span>Project Brief or Inquiry</span>
             <textarea
               rows={3}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Tell me about the system, hardware stack, or timeline..."
+              placeholder="Describe the software app, IoT device, embedded firmware, or robotics build..."
             />
           </label>
 
           <div className="form-submit-row">
-            <button type="submit" className="btn-solid-primary">
+            <button type="submit" className="btn-dual-gradient">
               <Send size={15} aria-hidden="true" />
-              <span>Send Inquiry</span>
+              <span>Send Inquiry via Email</span>
             </button>
           </div>
         </Motion.form>
       </div>
+
+      {/* Freelance Focus Scope Summary Strip */}
+      {freelanceTracks?.length > 0 && (
+        <div className="contact-scope-strip">
+          {freelanceTracks.map((track) => (
+            <button
+              key={track.num}
+              type="button"
+              onClick={() => setSelectedTopic(track.topic)}
+              className={`contact-scope-item ${selectedTopic === track.topic ? 'is-selected' : ''}`}
+            >
+              <span className="scope-num">{track.num}</span>
+              <strong>{track.title}</strong>
+              <p>{track.description}</p>
+            </button>
+          ))}
+        </div>
+      )}
     </section>
   )
 }

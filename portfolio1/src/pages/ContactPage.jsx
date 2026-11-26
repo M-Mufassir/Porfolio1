@@ -4,9 +4,10 @@ import { Contact } from '../components'
 export function ContactPage({
   contactLinks,
   inquiryTopics,
+  freelanceTracks,
   brandProfile,
-  onCopyEmail,
-  copied,
+  onCopyContact,
+  copiedValue,
 }) {
   return (
     <Motion.div
@@ -17,18 +18,20 @@ export function ContactPage({
       className="subpage-shell"
     >
       <div className="subpage-banner">
-        <span className="section-eyebrow">04 / COLLABORATION</span>
+        <span className="section-eyebrow">04 / COLLABORATION &amp; FREELANCE</span>
         <h1 className="subpage-headline">
-          Direct Channels &amp; <span className="hero-headline-dual-2">Project Inquiry</span>
+          Let&apos;s Work <span className="hero-headline-dual-1">Together</span> &amp;{' '}
+          <span className="hero-headline-dual-2">Build</span>
         </h1>
       </div>
 
       <Contact
         contactLinks={contactLinks}
         inquiryTopics={inquiryTopics}
+        freelanceTracks={freelanceTracks}
         brandProfile={brandProfile}
-        onCopyEmail={onCopyEmail}
-        copied={copied}
+        onCopyContact={onCopyContact}
+        copiedValue={copiedValue}
       />
     </Motion.div>
   )

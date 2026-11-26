@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { motion as Motion } from 'motion/react'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import { Hero } from '../components'
+import { Hero, WorkTogether } from '../components'
 
 export function HomePage({
   brandProfile,
@@ -9,7 +9,11 @@ export function HomePage({
   techRibbonItems,
   resumeLink,
   projectCards,
+  freelanceTracks,
+  contactLinks,
   onOpenProject,
+  onCopyContact,
+  copiedValue,
 }) {
   const navigate = useNavigate()
   const spotlightSystems = projectCards.slice(0, 3)
@@ -29,7 +33,7 @@ export function HomePage({
         resumeLink={resumeLink}
       />
 
-      {/* Home Page Quick Preview Strip: Featured Systems & Multi-Page Portals */}
+      {/* Selected Engineering Highlights */}
       <section className="section-open home-preview-section">
         <div className="home-preview-header">
           <div>
@@ -70,7 +74,7 @@ export function HomePage({
           ))}
         </div>
 
-        {/* Clean Multi-Page Route Strip (Zero Cards — Pure Open Hairline Navigation) */}
+        {/* Clean Multi-Page Route Strip */}
         <div className="home-route-strip">
           <Link to="/about" className="home-route-link">
             <span className="route-num">01</span>
@@ -100,6 +104,14 @@ export function HomePage({
           </Link>
         </div>
       </section>
+
+      {/* Let's Work Together — Freelance Focus & Direct Phones / Gmail */}
+      <WorkTogether
+        freelanceTracks={freelanceTracks}
+        contactLinks={contactLinks}
+        onCopyContact={onCopyContact}
+        copiedValue={copiedValue}
+      />
     </Motion.div>
   )
 }
