@@ -22,7 +22,7 @@ function upsertLink(rel, href) {
   el.setAttribute('href', href)
 }
 
-const DEFAULT_SITE_URL = 'https://mohamedmufassir.me'
+const DEFAULT_SITE_URL = 'https://www.mohamedmufassir.me'
 
 /**
  * Updates page-specific title, meta description, canonical URL, Open Graph,

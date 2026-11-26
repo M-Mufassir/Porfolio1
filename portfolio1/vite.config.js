@@ -13,7 +13,7 @@ const ROUTES = [
   { path: '/contact', priority: '0.85', changefreq: 'monthly' },
 ]
 
-const DEFAULT_SITE_URL = 'https://mohamedmufassir.me'
+const DEFAULT_SITE_URL = 'https://www.mohamedmufassir.me'
 
 function seoBuildPlugin(siteUrl) {
   const cleanUrl = (siteUrl || DEFAULT_SITE_URL).trim().replace(/\/+$/, '')
