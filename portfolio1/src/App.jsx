@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'motion/react'
 import Lenis from 'lenis'
 import { Check } from 'lucide-react'
 import './App.css'
@@ -22,24 +24,26 @@ import {
   techRibbonItems,
 } from './data/portfolio.js'
 import {
-  About,
   BackgroundCanvas,
   CommandMenu,
-  Contact,
-  Experience,
   Footer,
   Header,
-  Hero,
   MagneticCursor,
-  ProcessTimeline,
-  Projects,
-  Skills,
 } from './components'
+import {
+  AboutPage,
+  ContactPage,
+  ExperiencePage,
+  HomePage,
+  ProjectsPage,
+} from './pages'
 
 function App() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [commandOpen, setCommandOpen] = useState(false)
   const [copied, setCopied] = useState(false)
+  const location = useLocation()
+  const lenisRef = useRef(null)
 
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('portfolio-theme')
@@ -72,6 +76,7 @@ function App() {
     return () => window.removeEventListener('keydown', handleEscape)
   }, [])
 
+  // Smooth scrolling via Lenis
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return undefined
@@ -82,6 +87,7 @@ function App() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     })
+    lenisRef.current = lenis
 
     let rafId = 0
     const raf = (time) => {
@@ -93,8 +99,18 @@ function App() {
     return () => {
       window.cancelAnimationFrame(rafId)
       lenis.destroy()
+      lenisRef.current = null
     }
   }, [])
+
+  // Reset scroll position to top cleanly on every route navigation
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+  }, [location.pathname])
 
   return (
     <div className="site-shell">
@@ -112,49 +128,85 @@ function App() {
       />
 
       <main className="page-open-shell" id="top">
-        <Hero
-          brandProfile={brandProfile}
-          heroRoles={heroRoles}
-          techRibbonItems={techRibbonItems}
-          resumeLink={resumeLink}
-        />
-
-        <About
-          aboutHighlights={aboutHighlights}
-          inlineMetrics={inlineMetrics}
-          education={education}
-        />
-
-        <Projects
-          projectCards={projectCards}
-          selectedProject={selectedProject}
-          setSelectedProject={setSelectedProject}
-        />
-
-        <Skills
-          skillSections={skillSections}
-          interestAreas={interestAreas}
-        />
-
-        <ProcessTimeline engineeringProcess={engineeringProcess} />
-
-        <Experience
-          experiences={experiences}
-          experience={experience}
-          freelanceExperience={freelanceExperience}
-          resumeLink={resumeLink}
-        />
-
-        <Contact
-          contactLinks={contactLinks}
-          inquiryTopics={inquiryTopics}
-          brandProfile={brandProfile}
-          onCopyEmail={handleCopyEmail}
-          copied={copied}
-        />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  brandProfile={brandProfile}
+                  heroRoles={heroRoles}
+                  techRibbonItems={techRibbonItems}
+                  resumeLink={resumeLink}
+                  projectCards={projectCards}
+                  onOpenProject={setSelectedProject}
+                />
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <AboutPage
+                  aboutHighlights={aboutHighlights}
+                  inlineMetrics={inlineMetrics}
+                  education={education}
+                  skillSections={skillSections}
+                  interestAreas={interestAreas}
+                  engineeringProcess={engineeringProcess}
+                />
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <ProjectsPage
+                  projectCards={projectCards}
+                  selectedProject={selectedProject}
+                  setSelectedProject={setSelectedProject}
+                />
+              }
+            />
+            <Route
+              path="/experience"
+              element={
+                <ExperiencePage
+                  experiences={experiences}
+                  experience={experience}
+                  freelanceExperience={freelanceExperience}
+                  resumeLink={resumeLink}
+                />
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <ContactPage
+                  contactLinks={contactLinks}
+                  inquiryTopics={inquiryTopics}
+                  brandProfile={brandProfile}
+                  onCopyEmail={handleCopyEmail}
+                  copied={copied}
+                />
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <HomePage
+                  brandProfile={brandProfile}
+                  heroRoles={heroRoles}
+                  techRibbonItems={techRibbonItems}
+                  resumeLink={resumeLink}
+                  projectCards={projectCards}
+                  onOpenProject={setSelectedProject}
+                />
+              }
+            />
+          </Routes>
+        </AnimatePresence>
       </main>
 
-      <Footer brandProfile={brandProfile} />
+      <Footer brandProfile={brandProfile} navigationItems={navigationItems} />
 
       <CommandMenu
         open={commandOpen}

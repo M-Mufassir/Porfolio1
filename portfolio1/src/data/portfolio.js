@@ -1,9 +1,9 @@
 export const navigationItems = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Process', href: '#process' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', to: '/' },
+  { label: 'About', to: '/about' },
+  { label: 'Projects', to: '/projects' },
+  { label: 'Experience', to: '/experience' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export const brandProfile = {

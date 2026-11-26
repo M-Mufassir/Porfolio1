@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion as Motion, useScroll, useSpring } from 'motion/react'
 import { Command, Menu, Moon, Sun, X } from 'lucide-react'
 
@@ -10,8 +11,8 @@ export function Header({
   onOpenCommand,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
   const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 180, damping: 28, restDelta: 0.001 })
@@ -19,54 +20,36 @@ export function Header({
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 24)
-
-      const sections = navigationItems
-        .map((item) => item.href.replace('#', ''))
-        .filter(Boolean)
-
-      const scrollPos = window.scrollY + 180
-
-      for (let i = sections.length - 1; i >= 0; i -= 1) {
-        const el = document.getElementById(sections[i])
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(sections[i])
-          return
-        }
-      }
-      if (window.scrollY < 100) {
-        setActiveSection('')
-      }
     }
-
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
-
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [navigationItems])
+  }, [])
 
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
-      {/* Thin Scroll Progress Hairline */}
       <Motion.div className="scroll-progress-line" style={{ scaleX }} aria-hidden="true" />
 
       <div className="header-inner">
-        <a className="brand-lockup" href="#top" aria-label="Mohamed Mufassir - Return to top">
+        <Link className="brand-lockup" to="/" aria-label="Mohamed Mufassir - Home">
           <span className="brand-mark">{brandProfile.monogram}</span>
           <span className="brand-copy">
             <strong>{brandProfile.name}</strong>
           </span>
-        </a>
+        </Link>
 
-        {/* Clean Unboxed Minimal Navigation (Ref 1 + Ref 2 + Ref 3) */}
+        {/* Multi-Page Navigation Links with Animated Active Underline */}
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navigationItems.map((item) => {
-            const sectionId = item.href.replace('#', '')
-            const isActive = activeSection === sectionId
+            const isActive =
+              item.to === '/'
+                ? location.pathname === '/'
+                : location.pathname.startsWith(item.to)
 
             return (
-              <a
-                key={item.href}
-                href={item.href}
+              <NavLink
+                key={item.to}
+                to={item.to}
                 className={`nav-link ${isActive ? 'is-active' : ''}`}
               >
                 <span>{item.label}</span>
@@ -77,7 +60,7 @@ export function Header({
                     transition={{ type: 'spring', stiffness: 420, damping: 32 }}
                   />
                 )}
-              </a>
+              </NavLink>
             )
           })}
         </nav>
@@ -105,10 +88,9 @@ export function Header({
           </button>
 
           <div className="header-cta-wrap">
-            <a className="header-cta" href="#contact">
+            <Link className="header-cta" to="/contact">
               Let&apos;s Work
-            </a>
-            {/* Subtle Ref 1 Kawsar curved hand-drawn annotation cue */}
+            </Link>
             <svg
               className="header-doodle-arrow"
               viewBox="0 0 46 38"
@@ -148,20 +130,17 @@ export function Header({
             className="mobile-nav-drawer"
             aria-label="Mobile navigation"
           >
-            {navigationItems.map((item) => {
-              const sectionId = item.href.replace('#', '')
-              const isActive = activeSection === sectionId
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`mobile-nav-link ${isActive ? 'is-active' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              )
-            })}
+            {navigationItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === '/'}
+                className={({ isActive }) => `mobile-nav-link ${isActive ? 'is-active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </Motion.nav>
         )}
       </AnimatePresence>

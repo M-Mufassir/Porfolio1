@@ -1,16 +1,17 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Command } from 'cmdk'
 import {
   Briefcase,
   Cpu,
   Download,
   FolderGit2,
+  Home,
   Mail,
   Moon,
   Search,
   Sun,
   User,
-  Wrench,
   X,
 } from 'lucide-react'
 
@@ -26,6 +27,8 @@ export function CommandMenu({
   toggleTheme,
   onCopyEmail,
 }) {
+  const navigate = useNavigate()
+
   useEffect(() => {
     const down = (e) => {
       if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && document.activeElement === document.body)) {
@@ -39,13 +42,9 @@ export function CommandMenu({
 
   const emailContact = contactLinks?.find((c) => c.label.toLowerCase() === 'email')
 
-  const jumpTo = (href) => {
+  const goToPage = (to) => {
     setOpen(false)
-    const id = href.replace('#', '')
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
+    navigate(to)
   }
 
   return (
@@ -60,7 +59,7 @@ export function CommandMenu({
         <div className="cmdk-input-wrap">
           <Search size={17} className="cmdk-search-icon" aria-hidden="true" />
           <Command.Input
-            placeholder="Jump to a section, engineered system, or action..."
+            placeholder="Navigate to a page, engineered system, or action..."
             className="cmdk-input"
           />
           <button
@@ -74,23 +73,22 @@ export function CommandMenu({
         </div>
 
         <Command.List className="cmdk-list">
-          <Command.Empty className="cmdk-empty">No matching systems or commands found.</Command.Empty>
+          <Command.Empty className="cmdk-empty">No matching pages, systems, or commands found.</Command.Empty>
 
-          <Command.Group heading="Sections" className="cmdk-group">
+          <Command.Group heading="Pages" className="cmdk-group">
             {navigationItems.map((item) => (
               <Command.Item
-                key={item.href}
-                value={`section ${item.label}`}
-                onSelect={() => jumpTo(item.href)}
+                key={item.to}
+                value={`page ${item.label}`}
+                onSelect={() => goToPage(item.to)}
                 className="cmdk-item"
               >
+                {item.label === 'Home' && <Home size={15} />}
                 {item.label === 'About' && <User size={15} />}
-                {item.label === 'Skills' && <Wrench size={15} />}
                 {item.label === 'Projects' && <FolderGit2 size={15} />}
-                {item.label === 'Process' && <Cpu size={15} />}
                 {item.label === 'Experience' && <Briefcase size={15} />}
                 {item.label === 'Contact' && <Mail size={15} />}
-                <span>Go to {item.label}</span>
+                <span>Open {item.label} Page</span>
               </Command.Item>
             ))}
           </Command.Group>
@@ -102,6 +100,7 @@ export function CommandMenu({
                 value={`${project.title} ${project.domainLabel} ${project.stack.join(' ')}`}
                 onSelect={() => {
                   setOpen(false)
+                  navigate('/projects')
                   onSelectProject(project)
                 }}
                 className="cmdk-item"

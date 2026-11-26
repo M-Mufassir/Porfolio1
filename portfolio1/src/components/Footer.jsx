@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import { ArrowUp } from 'lucide-react'
 
-export function Footer({ brandProfile }) {
+export function Footer({ brandProfile, navigationItems }) {
   const currentYear = new Date().getFullYear()
 
   const scrollToTop = () => {
@@ -18,19 +19,26 @@ export function Footer({ brandProfile }) {
           </div>
         </div>
 
-        <p className="footer-copy">
-          © {currentYear} {brandProfile.name}
-        </p>
+        <nav className="footer-routes" aria-label="Footer page links">
+          {navigationItems.map((item) => (
+            <Link key={item.to} to={item.to} className="footer-route-link">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
-        <button
-          className="back-to-top-btn"
-          onClick={scrollToTop}
-          aria-label="Scroll back to top of page"
-          type="button"
-        >
-          <span>Top</span>
-          <ArrowUp size={15} aria-hidden="true" />
-        </button>
+        <div className="footer-right">
+          <p className="footer-copy">© {currentYear} {brandProfile.name}</p>
+          <button
+            className="back-to-top-btn"
+            onClick={scrollToTop}
+            aria-label="Scroll back to top of page"
+            type="button"
+          >
+            <span>Top</span>
+            <ArrowUp size={15} aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </footer>
   )
