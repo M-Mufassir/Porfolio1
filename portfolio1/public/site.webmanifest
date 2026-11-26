@@ -1,0 +1,23 @@
+{
+  "name": "Mohamed Mufassir — MUFASSIR.dev",
+  "short_name": "MUFASSIR.dev",
+  "description": "Portfolio of Mohamed Mufassir — Embedded Systems, Robotics, IoT & Software Engineering.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070a12",
+  "theme_color": "#070a12",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
